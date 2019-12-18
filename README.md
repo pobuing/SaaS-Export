@@ -12,4 +12,4 @@ Saas-Export 货贷云平台
 Spring+SpringMVC+Mybatis
 
 * 2019-12-17
-    * 项目环境搭建完毕 整合完成Spring+SpringMVC+Mybaties
+    * 项目环境搭建完毕 整合完成Spring+SpringMVC+Mybatis
