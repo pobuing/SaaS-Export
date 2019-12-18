@@ -10,3 +10,6 @@ ssm框架练手项目 货物代理运输
 Saas-Export 货贷云平台
 技术栈(动态更新)：
 Spring+SpringMVC+Mybatis
+
+* 2019-12-17
+    * 项目环境搭建完毕 整合完成Spring+SpringMVC+Mybaties
