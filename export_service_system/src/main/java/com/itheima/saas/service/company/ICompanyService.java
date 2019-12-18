@@ -18,4 +18,12 @@ public interface ICompanyService {
      * @return
      */
     List<Company> findAll();
+
+    void save(Company company);
+
+    Company findById(String id);
+
+    void update(Company company);
+
+    void deleteById(String id);
 }

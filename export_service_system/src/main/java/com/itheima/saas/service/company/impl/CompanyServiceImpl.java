@@ -6,7 +6,6 @@ import com.itheima.saas.service.company.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,5 +22,25 @@ public class CompanyServiceImpl implements ICompanyService {
 
     public List<Company> findAll() {
         return companyDao.findAll();
+    }
+
+    @Override
+    public void save(Company company) {
+        companyDao.save(company);
+    }
+
+    @Override
+    public Company findById(String id) {
+        return companyDao.findById(id);
+    }
+
+    @Override
+    public void update(Company company) {
+        companyDao.update(company);
+    }
+
+    @Override
+    public void deleteById(String id) {
+        companyDao.deleteById(id);
     }
 }

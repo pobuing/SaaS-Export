@@ -13,3 +13,6 @@ Spring+SpringMVC+Mybatis
 
 * 2019-12-17
     * 项目环境搭建完毕 整合完成Spring+SpringMVC+Mybatis
+
+* 2019-12-18
+    * 完成企业信息管理功能，提供企业信息的增加、删除、修改、查询
