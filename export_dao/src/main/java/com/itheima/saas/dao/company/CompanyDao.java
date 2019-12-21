@@ -1,8 +1,7 @@
 package com.itheima.saas.dao.company;
 
 import com.itheima.saas.domain.company.Company;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +21,20 @@ public interface CompanyDao {
     void update(Company company);
 
     void deleteById(String id);
+
+    /**
+     * 查询总数
+     *
+     * @return
+     */
+    long findCount();
+
+    /**
+     * 分页查询
+     *
+     * @param index
+     * @param size
+     * @return
+     */
+    List<Company> findByPage(@Param("index") int index, @Param("size") int size);
 }

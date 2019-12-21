@@ -29,6 +29,12 @@
             <artifactId>export_dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.itheima.saas</groupId>
+            <artifactId>export_common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>

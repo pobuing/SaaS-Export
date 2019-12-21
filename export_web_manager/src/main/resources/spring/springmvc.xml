@@ -11,13 +11,15 @@
     <context:component-scan base-package="com.itheima.saas.web.controller"/>
     <!--    配置处理器映射器 处理器适配器-->
     <mvc:annotation-driven conversion-service="conversionService2"/>
+    <!--    释放静态资源-->
+    <mvc:default-servlet-handler/>
     <!--    配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
         <property name="prefix" value="/WEB-INF/pages/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
     <!--    统一异常处理-->
-    <bean class="com.itheima.saas.web.exceptions.CustomerExceptionResolver"/>
+    <!--    <bean class="com.itheima.saas.web.exceptions.CustomerExceptionResolver"/>-->
     <!--    配置转换器-->
     <bean class="org.springframework.context.support.ConversionServiceFactoryBean" id="conversionService2">
         <property name="converters">

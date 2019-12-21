@@ -49,4 +49,13 @@
     <delete id="deleteById">
         DELETE FROM ss_company WHERE id = #{id};
     </delete>
+
+
+    <select id="findCount" resultType="long">
+        SELECT COUNT(*) FROM ss_company;
+    </select>
+
+    <select id="findByPage" resultMap="baseRestMap" parameterType="map">
+        SELECT * FROM ss_company limit #{index},#{size}
+    </select>
 </mapper>

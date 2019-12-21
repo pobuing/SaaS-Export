@@ -1,5 +1,6 @@
 package com.itheima.saas.service.company;
 
+import com.itheima.common.entity.PageBean;
 import com.itheima.saas.domain.company.Company;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface ICompanyService {
     void update(Company company);
 
     void deleteById(String id);
+
+    PageBean findByPage(int page, int size);
 }

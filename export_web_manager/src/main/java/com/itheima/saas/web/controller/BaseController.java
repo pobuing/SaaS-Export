@@ -17,11 +17,16 @@ public class BaseController {
     protected HttpServletRequest request;
     protected HttpServletResponse response;
     protected HttpSession session;
+    protected String companyName;
+    protected String companyId;
 
     @ModelAttribute
     public void init(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         this.request = request;
         this.response = response;
         this.session = session;
+        //测试数据
+        this.companyId = "1";
+        this.companyName = "传智播客教育股份有限公司";
     }
 }

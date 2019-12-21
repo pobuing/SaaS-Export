@@ -1,5 +1,6 @@
 package com.itheima.saas.web.controller.company;
 
+import com.itheima.common.entity.PageBean;
 import com.itheima.saas.domain.company.Company;
 import com.itheima.saas.service.company.ICompanyService;
 import com.itheima.saas.web.controller.BaseController;
@@ -7,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,11 +26,12 @@ public class CompanyController extends BaseController {
     @Autowired
     private ICompanyService companyService;
 
-    @RequestMapping("/list")
-    public String list() {
-        List<Company> list = companyService.findAll();
-        System.out.println(list);
-        request.setAttribute("list", list);
+
+    @RequestMapping(value = "/list", name = "企业列表")
+    public String list(@RequestParam(defaultValue = "1") int page,
+                       @RequestParam(defaultValue = "5") int size) {
+        PageBean pageBean = companyService.findByPage(page, size);
+        request.setAttribute("page", pageBean);
         return "company/company-list";
     }
 
