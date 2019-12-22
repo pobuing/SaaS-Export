@@ -2,8 +2,10 @@ package com.itheima.saas.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.itheima.saas.domain.system.Dept;
+import com.itheima.saas.domain.system.Role;
 import com.itheima.saas.domain.system.User;
 import com.itheima.saas.service.system.IDeptService;
+import com.itheima.saas.service.system.IRoleService;
 import com.itheima.saas.service.system.IUserService;
 import com.itheima.saas.service.system.impl.IDeptServiceImpl;
 import com.itheima.saas.service.system.impl.UserServiceImpl;
@@ -31,6 +33,8 @@ public class UserController extends BaseController {
     private IUserService userService;
     @Autowired
     private IDeptService deptService;
+    @Autowired
+    private IRoleService roleService;
 
     @RequestMapping(value = "/list", name = "分页查询用户列表")
     public String list(@RequestParam(defaultValue = "1") int page,
@@ -79,9 +83,35 @@ public class UserController extends BaseController {
         return "system/user/user-update";
     }
 
-    @RequestMapping(value = "/delete",name="删除选中的用户")
-    public String delete(String id){
+    @RequestMapping(value = "/delete", name = "删除选中的用户")
+    public String delete(String id) {
         userService.delete(id);
         return "redirect:/system/user/list.do";
     }
+
+    @RequestMapping(value = "/roleList", name = "跳转用户角色分配页面")
+    public String roleList(String id) {
+        //根据id查询user信息
+        User user = userService.findById(id);
+        request.setAttribute("user", user);
+        //找到所有角色信息
+        List<Role> roleList = roleService.findAll(companyId);
+        request.setAttribute("roleList", roleList);
+
+        //通过用户查询本身具有的角色信息
+        List<Role> userRole = roleService.findByUserId(id);
+        String userRoleStr = "";
+        for (Role role : userRole) {
+            userRoleStr += userRoleStr + role.getId() + ",";
+        }
+        request.setAttribute("userRoleStr", userRoleStr);
+        return "system/user/user-role";
+    }
+
+    @RequestMapping(value = "/changeRole", name = "保存用户角色")
+    public String changeRole(String userid, String roleIds) {
+        roleService.changeRole(userid,roleIds);
+        return "redirect:/system/user/list.do";
+    }
+
 }
