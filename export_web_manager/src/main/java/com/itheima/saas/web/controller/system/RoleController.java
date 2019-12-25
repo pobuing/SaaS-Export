@@ -1,8 +1,9 @@
 package com.itheima.saas.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
+import com.itheima.saas.domain.system.Module;
 import com.itheima.saas.domain.system.Role;
-import com.itheima.saas.domain.system.User;
+import com.itheima.saas.service.system.IModuleService;
 import com.itheima.saas.service.system.IRoleService;
 import com.itheima.saas.service.system.IUserService;
 import com.itheima.saas.web.controller.BaseController;
@@ -11,10 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.function.Consumer;
+import java.util.*;
 
 /**
  * @author wangxin
@@ -29,6 +29,9 @@ public class RoleController extends BaseController {
     private IRoleService roleService;
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IModuleService moduleService;
 
     @RequestMapping(value = "/list", name = "分页查询角色列表")
     public String list(@RequestParam(defaultValue = "1") int page,
@@ -72,5 +75,42 @@ public class RoleController extends BaseController {
         return "redirect:/system/role/list.do";
     }
 
+
+    @RequestMapping(value = "/roleModule", name = "跳转角色分配页面")
+    public String roleModule(String roleid) {
+        Role role = roleService.findById(roleid);
+        request.setAttribute("role", role);
+        return "system/role/role-module";
+    }
+
+    //初始化模块数据
+    @RequestMapping(value = "/initModuleData", name = "初始化模块数据")
+    public @ResponseBody
+    List<Map> initModuleData(String id) {
+        //查询所有模块
+        List<Module> moduleList = moduleService.findAll();
+        //通过roleId查询该角色的模块列表
+        List<Module> roleModule = moduleService.findByRoleId(id);
+        //构建前端需要的list
+        List<Map> list = new ArrayList<>();
+        for (Module module : moduleList) {
+            Map map = new HashMap();
+            map.put("id", module.getId());
+            map.put("pId", module.getParentId());
+            map.put("name", module.getName());
+            //如果该角色的module在modulelist中存在 则添加选中
+            if (roleModule.contains(module)) {
+                map.put("checked", true);
+            }
+            list.add(map);
+        }
+        return list;
+    }
+
+    @RequestMapping(value = "/updateRoleModule", name = "修改用户角色对应的模块")
+    public String updateRoleModule(String roleid, String moduleIds) {
+        moduleService.updateRoleModule(roleid,moduleIds);
+        return "redirect:/system/role/list.do";
+    }
 
 }

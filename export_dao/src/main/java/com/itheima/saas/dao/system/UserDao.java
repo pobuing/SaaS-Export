@@ -26,4 +26,6 @@ public interface UserDao {
     //更新
     void update(User user);
 
+    User findByEmail(String email);
+
 }

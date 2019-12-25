@@ -7,6 +7,7 @@ import com.itheima.saas.service.system.IModuleService;
 import com.itheima.saas.service.system.IUserService;
 import com.itheima.saas.web.controller.BaseController;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,8 @@ public class ModuleController extends BaseController {
     private IModuleService moduleService;
 
 
-
     //分页查询模块列表
+    @RequiresPermissions("模块管理")
     @RequestMapping(value = "/list", name = "分页查询模块列表")
     public String list(@RequestParam(defaultValue = "1") int page,
                        @RequestParam(defaultValue = "5") int size) {

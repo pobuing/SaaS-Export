@@ -1,14 +1,13 @@
 package com.itheima.saas.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
+import com.itheima.common.utils.Encrypt;
 import com.itheima.saas.domain.system.Dept;
 import com.itheima.saas.domain.system.Role;
 import com.itheima.saas.domain.system.User;
 import com.itheima.saas.service.system.IDeptService;
 import com.itheima.saas.service.system.IRoleService;
 import com.itheima.saas.service.system.IUserService;
-import com.itheima.saas.service.system.impl.IDeptServiceImpl;
-import com.itheima.saas.service.system.impl.UserServiceImpl;
 import com.itheima.saas.web.controller.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +56,10 @@ public class UserController extends BaseController {
     public String edit(User user) {
         user.setCompanyId(companyId);
         user.setCompanyName(companyName);
-        if (StringUtils.isEmpty(user.getId())) {
+        if(StringUtils.isEmpty(user.getId())) {
             //新增设置id
             user.setId(UUID.randomUUID().toString());
+            user.setPassword(Encrypt.md5(user.getPassword(), user.getEmail()));
             //调用service 保存
             userService.update(user);
         } else {

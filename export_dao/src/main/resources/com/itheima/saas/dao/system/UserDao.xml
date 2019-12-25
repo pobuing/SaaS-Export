@@ -69,4 +69,9 @@ insert into pe_user (user_id, dept_id, email, user_name, password, state, compan
       delete from pe_user where user_id = #{id}
     </delete>
 
+    <!--    根据email查询用户信息-->
+    <select id="findByEmail" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM pe_user WHERE email = #{email}
+    </select>
+
 </mapper>

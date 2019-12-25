@@ -28,4 +28,6 @@
             </set>
         </property>
     </bean>
+    <!--    开启aop-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>

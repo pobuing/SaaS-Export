@@ -49,4 +49,9 @@ public class UserServiceImpl implements IUserService {
         //构造PageInfo
         return new PageInfo(list);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
 }

@@ -1,6 +1,7 @@
 package com.itheima.saas.dao.system;
 
 import com.itheima.saas.domain.system.Module;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,4 +26,15 @@ public interface ModuleDao {
 
     //修改模块
     void update(Module module);
+
+    //根据roleid查询该角色具有的module列表
+    List<Module> findByRoleId(String id);
+
+    void deleteByRoleId(String roleid);
+
+    void insertRoleModule(@Param("roleId") String roleId, @Param("moduleId") String moduleId);
+
+    List<Module> findByBelong(int belong);
+
+    List<Module> findByUserId(String id);
 }

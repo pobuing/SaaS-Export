@@ -68,4 +68,5 @@ public class IRoleServiceImpl implements IRoleService {
             roleDao.insertUserRole(userid, roleId);
         }
     }
+
 }

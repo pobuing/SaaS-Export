@@ -20,4 +20,6 @@ public interface IUserService {
     void delete(String id);
     //分页查询所有数据
     PageInfo<User> findAll(int page,int size,String companyId);
+
+    User findByEmail(String email);
 }

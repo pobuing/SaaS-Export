@@ -2,6 +2,8 @@ package com.itheima.saas.service.system;
 
 import com.github.pagehelper.PageInfo;
 import com.itheima.saas.domain.system.Module;
+import com.itheima.saas.domain.system.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,4 +30,10 @@ public interface IModuleService {
     void update(Module module);
 
     List<Module> findAll();
+
+    List<Module> findByRoleId(String id);
+
+    void updateRoleModule( String roleId,String moduleId);
+
+    List<Module> findByUser(User user);
 }
