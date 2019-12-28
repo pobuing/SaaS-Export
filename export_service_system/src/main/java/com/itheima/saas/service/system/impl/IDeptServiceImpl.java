@@ -1,6 +1,6 @@
 package com.itheima.saas.service.system.impl;
 
-import com.itheima.common.entity.PageBean;
+import com.itheima.saas.common.entity.PageBean;
 import com.itheima.saas.dao.system.DetpDao;
 import com.itheima.saas.domain.system.Dept;
 import com.itheima.saas.service.system.IDeptService;

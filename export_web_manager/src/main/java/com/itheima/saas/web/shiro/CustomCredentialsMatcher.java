@@ -1,9 +1,8 @@
 package com.itheima.saas.web.shiro;
 
-import com.itheima.common.utils.Encrypt;
+import com.itheima.saas.common.utils.Encrypt;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.RememberMeAuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 

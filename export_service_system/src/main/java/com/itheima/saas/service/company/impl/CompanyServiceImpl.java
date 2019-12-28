@@ -1,6 +1,6 @@
 package com.itheima.saas.service.company.impl;
 
-import com.itheima.common.entity.PageBean;
+import com.itheima.saas.common.entity.PageBean;
 import com.itheima.saas.dao.company.CompanyDao;
 import com.itheima.saas.domain.company.Company;
 import com.itheima.saas.service.company.ICompanyService;

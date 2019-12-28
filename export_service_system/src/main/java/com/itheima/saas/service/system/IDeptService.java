@@ -1,6 +1,6 @@
 package com.itheima.saas.service.system;
 
-import com.itheima.common.entity.PageBean;
+import com.itheima.saas.common.entity.PageBean;
 import com.itheima.saas.domain.system.Dept;
 
 import java.util.List;

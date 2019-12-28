@@ -1,5 +1,6 @@
 package com.itheima.saas.domain.company;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * company实体类
  */
 
-public class Company {
+public class Company implements Serializable {
     private String id;
     private String name;
     private Date expirationDate;

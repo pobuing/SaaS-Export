@@ -1,6 +1,5 @@
 package com.itheima.saas.test;
 
-import com.itheima.saas.dao.company.CompanyDao;
 import com.itheima.saas.service.company.ICompanyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

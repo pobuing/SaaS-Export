@@ -1,7 +1,7 @@
 package com.itheima.saas.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
-import com.itheima.common.utils.Encrypt;
+import com.itheima.saas.common.utils.Encrypt;
 import com.itheima.saas.domain.system.Dept;
 import com.itheima.saas.domain.system.Role;
 import com.itheima.saas.domain.system.User;

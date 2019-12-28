@@ -1,6 +1,6 @@
 package com.itheima.saas.web.controller.system;
 
-import com.itheima.common.entity.PageBean;
+import com.itheima.saas.common.entity.PageBean;
 import com.itheima.saas.domain.system.Dept;
 import com.itheima.saas.service.system.IDeptService;
 import com.itheima.saas.web.controller.BaseController;

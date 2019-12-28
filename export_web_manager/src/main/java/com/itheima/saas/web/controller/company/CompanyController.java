@@ -1,6 +1,6 @@
 package com.itheima.saas.web.controller.company;
 
-import com.itheima.common.entity.PageBean;
+import com.itheima.saas.common.entity.PageBean;
 import com.itheima.saas.domain.company.Company;
 import com.itheima.saas.service.company.ICompanyService;
 import com.itheima.saas.web.controller.BaseController;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.UUID;
 
 /**
