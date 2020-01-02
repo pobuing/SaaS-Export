@@ -1,6 +1,8 @@
 package com.itheima.saas.domain.system;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     /** 
      */ 
     private String id;

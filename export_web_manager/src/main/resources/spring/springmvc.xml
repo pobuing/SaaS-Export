@@ -3,11 +3,12 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <context:component-scan base-package="com.itheima.saas.web.controller"/>
     <!--    配置处理器映射器 处理器适配器-->
     <mvc:annotation-driven conversion-service="conversionService2"/>
@@ -30,4 +31,21 @@
     </bean>
     <!--    开启aop-->
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <!--    dubbo消费者配置-->
+    <dubbo:application name="export_web_manager">
+        <dubbo:parameter key="qos.enable" value="false"></dubbo:parameter>
+    </dubbo:application>
+    <!--    注册中心-->
+    <dubbo:registry address="zookeeper://localhost:2181"></dubbo:registry>
+    <!--    dubbo的包扫描-->
+    <dubbo:annotation package="com.itheima.saas.web"></dubbo:annotation>
+    <!--    消费者启动时是否检查服务提供者是否启动-->
+    <dubbo:consumer check="false"></dubbo:consumer>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--限制最大上传图片的大小为5M-->
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
 </beans>

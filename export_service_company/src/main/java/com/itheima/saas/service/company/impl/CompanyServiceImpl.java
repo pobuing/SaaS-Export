@@ -15,7 +15,7 @@ import java.util.List;
  * @description: TODO
  * GOOD LUCK！
  */
-@Service
+@Service(timeout=1200000)
 public class CompanyServiceImpl implements ICompanyService {
     //注入dao
     @Autowired(required = false)
