@@ -8,19 +8,27 @@
         <outputRelativeToContentRoot value="true" />
         <module name="export_service_company" />
         <module name="export_web_protal" />
-        <module name="export_company_interface" />
+        <module name="export_packing" />
         <module name="export_domain" />
+        <module name="export-web-manager" />
+        <module name="export_listener" />
         <module name="export_stat_service" />
         <module name="export_dao" />
         <module name="export_cargo_service" />
         <module name="export_stat_interface" />
         <module name="export_common" />
+        <module name="export_packing_service" />
         <module name="export_web_manager" />
         <module name="export_service_system" />
-        <module name="export-web-manager" />
+        <module name="export_company_interface" />
         <module name="saas_domain" />
         <module name="export_cargo_interface" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="export_packing" target="1.5" />
+      <module name="export_packing_interface" target="1.5" />
+      <module name="export_packing_service" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

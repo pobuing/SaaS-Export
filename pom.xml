@@ -21,6 +21,10 @@
         <module>export_cargo_interface</module>
         <module>export_stat_interface</module>
         <module>export_stat_service</module>
+        <module>export_listener</module>
+        <module>export_packing</module>
+        <module>export_packing_interface</module>
+        <module>export_packing_service</module>
     </modules>
 
 

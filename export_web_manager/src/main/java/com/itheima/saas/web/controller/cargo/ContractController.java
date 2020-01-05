@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.itheima.saas.common.utils.DownloadUtil;
 import com.itheima.saas.domain.cargo.Contract;
 import com.itheima.saas.domain.cargo.ContractExample;
+import com.itheima.saas.domain.cargo.Export;
 import com.itheima.saas.domain.vo.ContractProductVo;
 import com.itheima.saas.service.stat.cargo.ContractService;
 import com.itheima.saas.web.controller.BaseController;
@@ -354,5 +355,22 @@ public class ContractController extends BaseController {
 
         return style;
     }
+
+
+    @RequestMapping(value = "/submit")
+    public String submit(String id) {
+        Contract contract = contractService.findById(id);
+        contract.setState(1);
+        contractService.update(contract);
+        return "redirect:/cargo/contract/list.do";
+    }
+
+    @RequestMapping(value = "/toView")
+    public String toView(String id) {
+        Contract contract = contractService.findById(id);
+        request.setAttribute("contract", contract);
+        return "cargo/contract/contract-view";
+    }
+
 
 }

@@ -16,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -157,4 +158,41 @@ public class ExportController extends BaseController {
         request.setAttribute("export", export);
         return "cargo/export/export-view";
     }
+
+    /**
+     * 通过id查询货物
+     *
+     * @param id 前端ajax 请求
+     * @return 状态返回前端页面
+     */
+    @RequestMapping(value = "/findExportById")
+    @ResponseBody
+    public String findExportById(String id) {
+        //根据id查询ExportExample
+        Export export = exportService.findById(id);
+        return String.valueOf(export.getState());
+    }
+
+    /**
+     * 提交
+     *
+     * @param id 提交数据
+     * @return
+     */
+    @RequestMapping(value = "/submit")
+    public String submit(String id) {
+        Export export = exportService.findById(id);
+        export.setState(1);
+        exportService.update(export);
+        return "redirect:/cargo/export/list.do";
+    }
+
+    @RequestMapping(value = "/cancel")
+    public String cancel(String id) {
+        Export export = exportService.findById(id);
+        export.setState(0);
+        exportService.update(export);
+        return "redirect:/cargo/export/list.do";
+    }
+
 }

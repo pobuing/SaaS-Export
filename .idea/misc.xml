@@ -20,6 +20,9 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/export-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/export_packing/pom.xml" />
+        <option value="$PROJECT_DIR$/export_packing_interface/pom.xml" />
+        <option value="$PROJECT_DIR$/export_packing_service/pom.xml" />
       </set>
     </option>
   </component>

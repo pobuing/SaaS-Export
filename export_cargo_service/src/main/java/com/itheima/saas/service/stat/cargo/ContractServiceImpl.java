@@ -33,7 +33,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     public void save(Contract contract) {
-        contractDao.insert(contract);
+        contractDao.insertSelective(contract);
     }
 
     public void update(Contract contract) {

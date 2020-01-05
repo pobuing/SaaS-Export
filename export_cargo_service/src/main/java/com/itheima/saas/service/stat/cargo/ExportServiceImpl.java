@@ -17,7 +17,6 @@ import java.util.*;
 @Service
 public class ExportServiceImpl implements ExportService {
 
-
     @Autowired
     private ExportDao exportDao;
 
@@ -25,124 +24,134 @@ public class ExportServiceImpl implements ExportService {
     private ContractDao contractDao;
 
     @Autowired
-    private ContractProductDao contractProductDao; //合同货物dao
+    private ContractProductDao contractProductDao;
 
     @Autowired
-    private ExportProductDao exportProductDao;//报运单商品dao
+    private ExportProductDao exportProductDao;
+
 
     @Autowired
-    private ExtCproductDao extCproductDao;  //合同附件Dao
+    private ExtCproductDao extCproductDao;
 
     @Autowired
-    private ExtEproductDao extEproductDao;  //报运单附件Dao
+    private ExtEproductDao extEproductDao;
 
-
-    //保存
-
-    /**
-     * export对象：
-     * contractIds : 所有勾选的合同id （已“，”隔开）
-     */
-    public void save(Export export) throws InvocationTargetException, IllegalAccessException {
-        //I.保存报运单
-        //1.设置报运单id
-        export.setId(UUID.randomUUID().toString());
-        //2.获取已勾选的合同id字符串 ： 1，2，3
-        String contractIds = export.getContractIds();
-        String[] ids = contractIds.split(",");
-        //3.根据购销合同的id查询所有购销合同
-        ContractExample contractExample = new ContractExample();
-        ContractExample.Criteria contractCriteria = contractExample.createCriteria();
-        contractCriteria.andIdIn(Arrays.asList(ids)); //将数组转化为list
-        List<Contract> list = contractDao.selectByExample(contractExample);
-        //4.拼接合同号集合的字符串
-        String contractNos = "";
-        for (Contract contract : list) {
-            contractNos += contract.getContractNo() + " ";
-            //修改合同状态 ： 将状态修改为已报运（2）
-            contract.setState(2);
-            contractDao.updateByPrimaryKeySelective(contract);
-        }
-        export.setCustomerContract(contractNos);
-        //II.保存报运单商品
-
-        Map<String, String> map = new HashMap<String, String>(); //货物id 和 商品id之间的关系    hw02  -- sp02
-
-        //1.根据合同id查询所有的货物
-        ContractProductExample productExample = new ContractProductExample();
-        ContractProductExample.Criteria productCriteria = productExample.createCriteria();
-        productCriteria.andContractIdIn(Arrays.asList(ids));
-        List<ContractProduct> cps = contractProductDao.selectByExample(productExample);
-        //2.循环所有的货物，创建报运单商品
-        for (ContractProduct cp : cps) {
-            //3.设置商品id ，设置报运单的（ID）外键 和其他的属性
-            ExportProduct ep = new ExportProduct();
-            BeanUtils.copyProperties(cp, ep); //将cp中的同名属性的数据 copy 到ep中的同名属性上
-            ep.setId(UUID.randomUUID().toString());
-            ep.setExportId(export.getId());
-            //4.保存报运单商品
-            exportProductDao.insertSelective(ep);
-            map.put(cp.getId(), ep.getId());
-        }
-        //III.保存报运单附件
-        //1.根据合同id查询所有的合同附件
-        ExtCproductExample example = new ExtCproductExample();
-        ExtCproductExample.Criteria criteria = example.createCriteria();
-        criteria.andContractIdIn(Arrays.asList(ids));
-        List<ExtCproduct> extcs = extCproductDao.selectByExample(example);
-        //2.循环所有的合同附件，创建报运单附件
-        for (ExtCproduct extc : extcs) {        //购销合同附件   货物id ： hw02
-            ExtEproduct exte = new ExtEproduct();
-            //3.设置普通属性
-            BeanUtils.copyProperties(extc, exte);
-            //4.设置id，报运单id，所属商品id
-            exte.setId(UUID.randomUUID().toString());
-            exte.setExportId(export.getId());
-            //所属商品id
-            String pid = map.get(extc.getContractProductId());// hw02货物id   --  商品的id sp02
-            exte.setExportProductId(pid); //设置商品id
-            //5.保存报运单附件
-            extEproductDao.insertSelective(exte);
-        }
-
-
-        //保存报运单
-        export.setState(0);//设置草稿状态
-        export.setProNum(cps.size());
-        export.setExtNum(extcs.size());
-        exportDao.insertSelective(export);
-    }
-
-    //更新
-    public void update(Export export) {
-        //1.更新报运单
-        exportDao.updateByPrimaryKeySelective(export);
-        //2.更新报运单中的每一个商品数据
-        for (ExportProduct ep : export.getExportProducts()) {
-            exportProductDao.updateByPrimaryKeySelective(ep);
-        }
-    }
-
-    //删除
-    public void delete(String id) {
-
-    }
-
-
-    //根据id查询
     public Export findById(String id) {
         return exportDao.selectByPrimaryKey(id);
     }
 
-    //分页
+    public void save(Export export) {
+        //1、export有contractIds，合同编号
+
+        int proNum = 0;
+        int extNum = 0;
+
+        List<ExportProduct> epList = new ArrayList<ExportProduct>();
+
+        //2、设置export的状态为0
+        export.setState(0);
+        //3、循环contractIds，得到合同contractId
+        String[] contractIds = export.getContractIds().split(",");
+        for (String contractId : contractIds) {
+            //4、通过合同的id查询合同实体类
+            Contract contract = contractDao.selectByPrimaryKey(contractId);
+            //5、设置合同的状态为已经报运，state=2
+            contract.setState(2);
+            //6、更新合同到数据库
+            contractDao.updateByPrimaryKeySelective(contract);
+            //--------------------------------------------更新合同状态
+            //7、通过合同contractId查询合同货物列表
+            ContractProductExample cpExample = new ContractProductExample();
+            ContractProductExample.Criteria cpCriteria = cpExample.createCriteria();
+            cpCriteria.andContractIdEqualTo(contractId);
+            List<ContractProduct> cpList = contractProductDao.selectByExample(cpExample);
+
+            //8、循环合同货物列表，得到合同货物contractProduct
+            for (ContractProduct contractProduct : cpList) {
+                //9、创建报运商品实体类
+                ExportProduct exportProduct = new ExportProduct();
+                //10、将合同货物信息写入到报运商品信息
+                //exportProduct.setProductNo(contractProduct.getProductNo());
+                try {
+                    BeanUtils.copyProperties(contractProduct, exportProduct);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                //11、设置报运单exportId
+                exportProduct.setExportId(export.getId());
+                //12、设置报运商品的id
+                exportProduct.setId(UUID.randomUUID().toString());
+                //13、将报运商品写入数据库
+                exportProductDao.insertSelective(exportProduct);
+
+                proNum++;
+
+                //14、将报运商品列表设置到报运单中
+                epList.add(exportProduct);
+                //--------------------------------------------写入报运单商品
+
+                //15、通过合同货物contractProduct.getId查询合同附件列表
+                ExtCproductExample extCexample = new ExtCproductExample();
+                ExtCproductExample.Criteria extcCriteria = extCexample.createCriteria();
+                extcCriteria.andContractProductIdEqualTo(contractProduct.getId());
+                List<ExtCproduct> extCList = extCproductDao.selectByExample(extCexample);
+                //16、循环合同附件列表，得到合同附件extcProduct
+                for (ExtCproduct extCproduct : extCList) {
+                    //17、创建报运附件实体类
+                    ExtEproduct extEproduct = new ExtEproduct();
+                    //18、将合同附件信息写入到报运附件信息
+                    try {
+                        BeanUtils.copyProperties(extCproduct, extEproduct);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                    //19、设置报运单exportId
+                    extEproduct.setExportId(export.getId());
+                    //20、设置报运单商品exportProductId
+                    extEproduct.setExportProductId(exportProduct.getId());
+                    //21、设置报运附件的id
+                    extEproduct.setId(UUID.randomUUID().toString());
+                    //22、将报运附件写入数据库
+                    extEproductDao.insertSelective(extEproduct);
+
+                    extNum++;
+                    //--------------------------------------------写入报运单附件
+                }
+            }
+        }
+        //23、合计报运商品数量设置到报运单中
+        export.setProNum(proNum);
+        //24、合计报运附件数量设置到报运单中
+        export.setExtNum(extNum);
+        //25、设置报运单商品列表
+        export.setExportProducts(epList);
+        //26、将报运单写入数据库
+        exportDao.insertSelective(export);
+    }
+
+    public void update(Export export) {
+        exportDao.updateByPrimaryKeySelective(export);
+        if (export.getExportProducts() != null) {
+            for (ExportProduct exportProduct : export.getExportProducts()) {
+                exportProductDao.updateByPrimaryKeySelective(exportProduct);
+            }
+        }
+    }
+
+    public void delete(String id) {
+
+    }
+
     public PageInfo findAll(ExportExample example, int page, int size) {
         PageHelper.startPage(page, size);
         List<Export> list = exportDao.selectByExample(example);
         return new PageInfo(list);
     }
 
-
-    @Override
     public void updateE(ExportResult exportResult) {
         //1.根据exportResult更新export实体类
         Export export = new Export();

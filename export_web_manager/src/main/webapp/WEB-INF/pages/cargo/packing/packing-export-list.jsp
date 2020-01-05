@@ -49,13 +49,36 @@
     }
 
     function exportE() {
-        var id = getCheckId()
+        var id = getCheckId();
 
         if (id) {
             location.href = "${ctx}/cargo/export/exportE.do?id=" + id;
         } else {
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
+    }
+
+    function markBox() {
+        var id = getCheckIds();
+        console.log(id);
+        if (id) {
+            location.href = "${ctx}/cargo/packing/createBox.do?id=" + id;
+        } else {
+            alert("选择错误");
+        }
+    }
+
+    function getCheckIds() {
+        var size = $("input:checkbox:checked").length;
+        var ids;
+        for (let i = 0; i < size; i++) {
+            ids = ids + $('input[type=checkbox]:checked').val();
+            if (i != size - 1) {
+                //最后一条
+                ids += ',';
+            }
+        }
+        return ids;
     }
 
     //   查询当前报运状态
@@ -103,8 +126,8 @@
 <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
     <section class="content-header">
         <h1>
-            货运管理
-            <small>出口报运</small>
+            装箱管理
+            <small>报运单列表</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -131,10 +154,10 @@
                         <div class="form-group form-inline">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default" title="删除"
-                                        onclick='checkStatOp("deleteById")'><i
-                                        class="fa fa-trash-o"></i> 删除
+                                        onclick='markBox()'><i
+                                        class="fa fa-trash-o"></i> 装箱
                                 </button>
-                                <button type="button" class="btn btn-default" title="提交"
+                                <%--<button type="button" class="btn btn-default" title="提交"
                                         onclick='checkStatOp("submit")'><i
                                         class="fa fa-file-o"></i> 提交
                                 </button>
@@ -145,7 +168,7 @@
                                 <button type="button" class="btn btn-default" title="电子报运"
                                         onclick='checkStatOp("exportE")'><i
                                         class="fa fa-refresh"></i> 电子报运
-                                </button>
+                                </button>--%>
                             </div>
                         </div>
                     </div>
@@ -171,7 +194,7 @@
                             <th class="sorting">运输方式</th>
                             <th class="sorting">价格条件</th>
                             <th class="sorting">状态</th>
-                            <th class="text-center">操作</th>
+<%--                            <th class="text-center">操作</th>--%>
                         </tr>
                         </thead>
                         <tbody>
@@ -193,13 +216,13 @@
                                     <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
                                     <c:if test="${o.state==2}"><font color="red">已报运</font></c:if>
                                 </td>
-                                <td>
+                               <%-- <td>
                                     <a href="${ctx }/cargo/export/toView.do?id=${o.id}">[查看]</a>
                                     <a href="${ctx }/cargo/export/toUpdate.do?id=${o.id}">[编辑]</a>
                                     <c:if test="${o.state==2}">
                                         <a href="${ctx}/cargo/export/exportPdf.do?id=${o.id}">[下载]</a>
                                     </c:if>
-                                </td>
+                                </td>--%>
                             </tr>
                         </c:forEach>
                         </tbody>

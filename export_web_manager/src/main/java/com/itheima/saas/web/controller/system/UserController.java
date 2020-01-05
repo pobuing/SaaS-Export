@@ -2,6 +2,7 @@ package com.itheima.saas.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.itheima.saas.common.utils.Encrypt;
+import com.itheima.saas.common.utils.MailUtil;
 import com.itheima.saas.domain.system.Dept;
 import com.itheima.saas.domain.system.Role;
 import com.itheima.saas.domain.system.User;
@@ -10,12 +11,15 @@ import com.itheima.saas.service.stat.system.IRoleService;
 import com.itheima.saas.service.stat.system.IUserService;
 import com.itheima.saas.web.controller.BaseController;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -34,6 +38,8 @@ public class UserController extends BaseController {
     private IDeptService deptService;
     @Autowired
     private IRoleService roleService;
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     @RequestMapping(value = "/list", name = "分页查询用户列表")
     public String list(@RequestParam(defaultValue = "1") int page,
@@ -56,12 +62,36 @@ public class UserController extends BaseController {
     public String edit(User user) {
         user.setCompanyId(companyId);
         user.setCompanyName(companyName);
-        if(StringUtils.isEmpty(user.getId())) {
+        if (StringUtils.isEmpty(user.getId())) {
             //新增设置id
             user.setId(UUID.randomUUID().toString());
             user.setPassword(Encrypt.md5(user.getPassword(), user.getEmail()));
             //调用service 保存
-            userService.update(user);
+            userService.save(user);
+            String password = user.getPassword();
+            //发送邮件
+            String to = user.getEmail();
+            String subject = "欢迎来到SaaS-Export大家庭";
+            String content = "您使用的SaaS-Export平台通过：http://localhost:8080 进行登录，用户名为：" + to + "，密码是：" + password;
+            try {
+                MailUtil.sendMsg(to, subject, content);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //将邮件内容写入到rabbitMQ中
+
+            /**
+             * 两个参数：1、routingKey：队列名称，对应于配置文件中的队列名
+             *          2、传入的发送的消息参数
+             */
+
+            Map map = new HashMap();
+            map.put("to", to);
+            map.put("subject", subject);
+            map.put("content", content);
+
+            amqpTemplate.convertAndSend("mail.send", map);
         } else {
             //修改
             userService.update(user);
@@ -110,7 +140,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/changeRole", name = "保存用户角色")
     public String changeRole(String userid, String roleIds) {
-        roleService.changeRole(userid,roleIds);
+        roleService.changeRole(userid, roleIds);
         return "redirect:/system/user/list.do";
     }
 
