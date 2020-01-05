@@ -2,7 +2,7 @@ package com.itheima.saas.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.itheima.saas.domain.system.Module;
-import com.itheima.saas.service.system.IModuleService;
+import com.itheima.saas.service.stat.system.IModuleService;
 import com.itheima.saas.web.controller.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

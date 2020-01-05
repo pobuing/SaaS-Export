@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../base.jsp"%>
+<%@ include file="../base.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +26,10 @@
 <script src="../../plugins/echarts/echarts.min.js"></script>
 <script type="text/javascript">
 
-    $.get("/stat/getFactoryData.do",function(data) {
+    $.get("/stat/getFactoryData.do", function (data) {
 
         var titles = [];
-        for(var i=0;i<data.length;i++) {
+        for (var i = 0; i < data.length; i++) {
             titles[i] = data[i].name
         }
 
@@ -38,12 +38,12 @@
 
         // 指定图表的配置项和数据
         option = {
-            title : {
+            title: {
                 text: '统计分析',
                 subtext: '厂家销量统计',
-                x:'center'
+                x: 'center'
             },
-            tooltip : {
+            tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
@@ -52,13 +52,13 @@
                 left: 'left',
                 data: titles
             },
-            series : [
+            series: [
                 {
                     name: '访问来源',
                     type: 'pie',
-                    radius : '55%',
+                    radius: '55%',
                     center: ['50%', '60%'],
-                    data:data,
+                    data: data,
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,

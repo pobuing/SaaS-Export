@@ -1,6 +1,6 @@
 package com.itheima.saas.test;
 
-import com.itheima.saas.service.company.ICompanyService;
+import com.itheima.saas.service.stat.company.ICompanyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

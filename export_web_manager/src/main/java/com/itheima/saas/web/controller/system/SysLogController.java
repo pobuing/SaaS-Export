@@ -2,7 +2,7 @@ package com.itheima.saas.web.controller.system;
 
 import com.github.pagehelper.PageInfo;
 import com.itheima.saas.domain.system.SysLog;
-import com.itheima.saas.service.system.ISysLogService;
+import com.itheima.saas.service.stat.system.ISysLogService;
 import com.itheima.saas.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

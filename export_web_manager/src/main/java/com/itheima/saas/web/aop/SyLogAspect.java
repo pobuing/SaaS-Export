@@ -2,7 +2,7 @@ package com.itheima.saas.web.aop;
 
 import com.itheima.saas.domain.system.SysLog;
 import com.itheima.saas.domain.system.User;
-import com.itheima.saas.service.system.ISysLogService;
+import com.itheima.saas.service.stat.system.ISysLogService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

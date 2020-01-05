@@ -2,8 +2,8 @@ package com.itheima.saas.web.controller;
 
 import com.itheima.saas.domain.system.Module;
 import com.itheima.saas.domain.system.User;
-import com.itheima.saas.service.system.IModuleService;
-import com.itheima.saas.service.system.IUserService;
+import com.itheima.saas.service.stat.system.IModuleService;
+import com.itheima.saas.service.stat.system.IUserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -26,6 +26,11 @@ public class LoginController extends BaseController {
     private IUserService userService;
     @Autowired
     private IModuleService moduleService;
+
+    @RequestMapping("/home")
+    public String home() {
+        return "home/home";
+    }
 
     @RequestMapping(value = "/login", name = "用户登录")
     public String login(String email, String password) {

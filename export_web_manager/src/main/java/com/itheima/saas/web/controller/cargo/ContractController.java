@@ -6,7 +6,7 @@ import com.itheima.saas.common.utils.DownloadUtil;
 import com.itheima.saas.domain.cargo.Contract;
 import com.itheima.saas.domain.cargo.ContractExample;
 import com.itheima.saas.domain.vo.ContractProductVo;
-import com.itheima.saas.service.cargo.ContractService;
+import com.itheima.saas.service.stat.cargo.ContractService;
 import com.itheima.saas.web.controller.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.*;

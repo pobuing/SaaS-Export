@@ -38,4 +38,8 @@ Spring+SpringMVC+Mybatis
     * 完成购销合同模块
     * 使用POI操作Excel
     * 完成Excel导入 导出数据
+    
+* 2020-1-4 16:42
+    * 实现webservice调用数据
+    * 加入百度Echars 图表工具
    

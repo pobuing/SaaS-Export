@@ -6,18 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="export_dao" />
-        <module name="export_common" />
-        <module name="export_company_interface" />
-        <module name="export-web-manager" />
         <module name="export_service_company" />
-        <module name="saas_domain" />
-        <module name="export_web_manager" />
-        <module name="export_cargo_interface" />
         <module name="export_web_protal" />
+        <module name="export_company_interface" />
         <module name="export_domain" />
+        <module name="export_stat_service" />
+        <module name="export_dao" />
         <module name="export_cargo_service" />
+        <module name="export_stat_interface" />
+        <module name="export_common" />
+        <module name="export_web_manager" />
         <module name="export_service_system" />
+        <module name="export-web-manager" />
+        <module name="saas_domain" />
+        <module name="export_cargo_interface" />
       </profile>
     </annotationProcessing>
   </component>

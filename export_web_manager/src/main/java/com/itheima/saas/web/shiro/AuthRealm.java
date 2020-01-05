@@ -2,8 +2,8 @@ package com.itheima.saas.web.shiro;
 
 import com.itheima.saas.domain.system.Module;
 import com.itheima.saas.domain.system.User;
-import com.itheima.saas.service.system.IModuleService;
-import com.itheima.saas.service.system.IUserService;
+import com.itheima.saas.service.stat.system.IModuleService;
+import com.itheima.saas.service.stat.system.IUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
