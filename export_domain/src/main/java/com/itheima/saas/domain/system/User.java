@@ -63,14 +63,14 @@ public class User implements Serializable {
      */ 
     private String telephone;
 
-    private String openid;
+    private String openId;
 
-    public String getOpenid() {
-        return openid;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     /**

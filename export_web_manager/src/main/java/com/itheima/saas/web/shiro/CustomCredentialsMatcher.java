@@ -23,6 +23,10 @@ public class CustomCredentialsMatcher extends SimpleCredentialsMatcher {
 //        获取数据库密码
         String dbPassword = String.valueOf(info.getCredentials());
         System.out.println("dbPassword = " + dbPassword);
-        return md5Password.equals(dbPassword);
+        //加密后和数据库比较
+        boolean b1 = md5Password.equals(dbPassword);
+        //原本和数据库比较
+        boolean b2 = userPassword.equals(dbPassword);
+        return b1 || b2;
     }
 }

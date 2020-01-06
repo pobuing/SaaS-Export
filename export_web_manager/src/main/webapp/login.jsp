@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +34,8 @@
     <div class="login-box-body">
         <p class="login-box-msg">登录系统</p>
         <form action="/login.do" method="post">
+<%--            隐藏域提交--%>
+            <input type="hidden" name="openid" value="${openid}"/>
             <div class="form-group has-feedback">
                 <input type="email" name="email" value="lw@export.com" class="form-control" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -58,7 +61,9 @@
             <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-weixin"
                                                                                 onclick="wxLogin()"></i> 微信用户登录</a>
         </div>
+        <c:if test="${empty openid}">
         <div id="login_container"></div>
+        </c:if>
     </div>
 </div>
 <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>

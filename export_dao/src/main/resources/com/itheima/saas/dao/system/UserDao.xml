@@ -21,6 +21,7 @@
         <result column="degree" property="degree"/>
         <result column="remark" property="remark"/>
         <result column="order_no" property="orderNo"/>
+        <result column="openid" property="openId"/>
     </resultMap>
 
     <!--根据企业id查询全部-->
@@ -61,7 +62,8 @@ insert into pe_user (user_id, dept_id, email, user_name, password, state, compan
         telephone = #{telephone},
         degree = #{degree},
         remark = #{remark},
-        order_no = #{orderNo}
+        order_no = #{orderNo},
+        openid=#{openId}
         where user_id = #{id}
     </update>
     <!--根据id删除-->

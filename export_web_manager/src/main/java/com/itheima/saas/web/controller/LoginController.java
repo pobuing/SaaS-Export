@@ -41,7 +41,7 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(value = "/login", name = "用户登录")
-    public String login(String email, String password) {
+    public String login(String email, String password, String openid) {
         //判断参数
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
             request.setAttribute("error", "用户名或密码不能为空");
@@ -53,6 +53,11 @@ public class LoginController extends BaseController {
             //将用户输入的信息加入身份认证
             subject.login(usernamePasswordToken);
             User user = (User) subject.getPrincipal();
+            //设置openid,更新信息
+            if (!StringUtils.isEmpty(openid)) {
+                user.setOpenId(openid);
+                userService.update(user);
+            }
 //        通过邮箱查询数据库 得到用户信息
 //        User user = userService.findByEmail(email);
             //登录成功 加入session中
@@ -60,6 +65,7 @@ public class LoginController extends BaseController {
             //登录成功后将对应用户的对应角色的模块信息放入到session中
             List<Module> modules = moduleService.findByUser(user);
             session.setAttribute("modules", modules);
+            System.out.println("登录完成");
             //转发首页
             return "home/main";
         } catch (Exception e) {
@@ -97,11 +103,21 @@ public class LoginController extends BaseController {
                     request.setAttribute("openid", openid);
                     return "forward:login.jsp";
                 } else {
-                    // 不为空直接登录
-                    session.setAttribute("loginUser", byOpenId);
+                    Subject subject = SecurityUtils.getSubject();
+                    UsernamePasswordToken usernamePasswordToken =
+                            new UsernamePasswordToken(byOpenId.getEmail(), byOpenId.getPassword());
+                    //将用户输入的信息加入身份认证
+                    subject.login(usernamePasswordToken);
+                    User user = (User) subject.getPrincipal();
+
+//        通过邮箱查询数据库 得到用户信息
+//        User user = userService.findByEmail(email);
+                    //登录成功 加入session中
+                    session.setAttribute("loginUser", user);
                     //登录成功后将对应用户的对应角色的模块信息放入到session中
-                    List<Module> modules = moduleService.findByUser(byOpenId);
+                    List<Module> modules = moduleService.findByUser(user);
                     session.setAttribute("modules", modules);
+                    System.out.println("登录完成");
                     //转发首页
                     return "home/main";
 
