@@ -24,15 +24,6 @@ public class FinanceServiceImpl implements FinanceService {
     @Autowired
     private FinanceDao financeDao;
 
-    @Autowired
-    private PackingDao packingDao;
-
-    @Autowired
-    private ShippingDao shippingDao;
-    @Autowired
-    private ExportDao exportDao;
-    @Autowired
-    private ContractDao contractDao;
 
     @Override
     public PageInfo findAll(FinanceExample example, int page, int size) {
