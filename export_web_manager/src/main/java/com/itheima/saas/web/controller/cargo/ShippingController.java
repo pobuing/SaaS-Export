@@ -66,7 +66,7 @@ public class ShippingController extends BaseController {
         //改变状态
         shipping.setState(1L);
         //保存数据
-//        shippingService.update(shipping);
+        shippingService.update(shipping);
         //存储发票数据
         Invoice invoice = new Invoice();
         //创建单号
@@ -75,7 +75,6 @@ public class ShippingController extends BaseController {
         invoice.setTranscompanyName(shipping.getTranscompanyName());
         invoice.setCompanyId(companyId);
         invoice.setCompanyName(companyName);
-//        invoiceService.accounting(invoice);
         //结算
         accounting(invoice);
         //插入数据库

@@ -55,7 +55,7 @@ public class Finance implements Serializable {
      *
      * @mbg.generated
      */
-    private Long price;
+    private String price;
 
     /**
      *
@@ -212,7 +212,7 @@ public class Finance implements Serializable {
      *
      * @mbg.generated
      */
-    public Long getPrice() {
+    public String getPrice() {
         return price;
     }
 
@@ -224,8 +224,8 @@ public class Finance implements Serializable {
      *
      * @mbg.generated
      */
-    public void setPrice(Long price) {
-        this.price = price;
+    public void setPrice(String price) {
+        this.price = price == null ? null : price.trim();
     }
 
     /**

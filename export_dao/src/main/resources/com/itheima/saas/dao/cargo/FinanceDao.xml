@@ -11,7 +11,7 @@
     <result column="contract_no" jdbcType="VARCHAR" property="contractNo" />
     <result column="export_no" jdbcType="VARCHAR" property="exportNo" />
     <result column="num" jdbcType="VARCHAR" property="num" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="consumer_name" jdbcType="VARCHAR" property="consumerName" />
     <result column="company_id" jdbcType="VARCHAR" property="companyId" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
@@ -103,7 +103,7 @@
       consumer_name, company_id, company_name
       )
     values (#{financeId,jdbcType=VARCHAR}, #{incoiceId,jdbcType=VARCHAR}, #{contractNo,jdbcType=VARCHAR}, 
-      #{exportNo,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{exportNo,jdbcType=VARCHAR}, #{num,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
       #{consumerName,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}
       )
   </insert>
@@ -159,7 +159,7 @@
         #{num,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DECIMAL},
+        #{price,jdbcType=VARCHAR},
       </if>
       <if test="consumerName != null">
         #{consumerName,jdbcType=VARCHAR},
@@ -192,7 +192,7 @@
         num = #{num,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DECIMAL},
+        price = #{price,jdbcType=VARCHAR},
       </if>
       <if test="consumerName != null">
         consumer_name = #{consumerName,jdbcType=VARCHAR},
@@ -216,7 +216,7 @@
       contract_no = #{contractNo,jdbcType=VARCHAR},
       export_no = #{exportNo,jdbcType=VARCHAR},
       num = #{num,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
+      price = #{price,jdbcType=VARCHAR},
       consumer_name = #{consumerName,jdbcType=VARCHAR},
       company_id = #{companyId,jdbcType=VARCHAR},
       company_name = #{companyName,jdbcType=VARCHAR}
