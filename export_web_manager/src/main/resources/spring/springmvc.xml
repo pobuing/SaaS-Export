@@ -9,6 +9,8 @@
    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--    dubbo的包扫描-->
+    <dubbo:annotation package="com.itheima.saas.web"></dubbo:annotation>
     <context:component-scan base-package="com.itheima.saas.web.controller"/>
     <!--    配置处理器映射器 处理器适配器-->
     <mvc:annotation-driven conversion-service="conversionService2"/>
@@ -37,8 +39,7 @@
     </dubbo:application>
     <!--    注册中心-->
     <dubbo:registry address="zookeeper://localhost:2181"></dubbo:registry>
-    <!--    dubbo的包扫描-->
-    <dubbo:annotation package="com.itheima.saas.web"></dubbo:annotation>
+
     <!--    消费者启动时是否检查服务提供者是否启动-->
     <dubbo:consumer check="false"></dubbo:consumer>
 

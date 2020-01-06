@@ -1,10 +1,10 @@
-package com.itheima.saas.service.stat.cargo;
+package com.itheima.saas.service.cargo;
 
 import com.github.pagehelper.PageInfo;
+import com.itheima.saas.domain.cargo.Contract;
+import com.itheima.saas.domain.cargo.ContractExample;
 import com.itheima.saas.domain.cargo.Packing;
 import com.itheima.saas.domain.cargo.PackingExample;
-import com.itheima.saas.domain.cargo.Shipping;
-import com.itheima.saas.domain.cargo.ShippingExample;
 
 /**
  * @author wangxin
@@ -12,16 +12,16 @@ import com.itheima.saas.domain.cargo.ShippingExample;
  * @description: TODO
  * GOOD LUCK！
  */
-public interface ShippingService {
+public interface PackingService {
     /**
      * 查询所有
      *
-     * @param shippingExample
+     * @param contractExample
      * @param page
      * @param size
      * @return
      */
-    PageInfo findAll(ShippingExample shippingExample, int page, int size);
+    PageInfo findAll(PackingExample contractExample, int page, int size);
 
     /**
      * 通过id查询合同实体
@@ -29,21 +29,21 @@ public interface ShippingService {
      * @param id 合同id
      * @return
      */
-    Shipping findById(String id);
+    Packing findById(String id);
 
     /**
      * 保存合同信息
      *
-     * @param shipping
+     * @param contract
      */
-    void save(Shipping shipping);
+    void save(Packing contract);
 
     /**
      * 更新合同信息
      *
-     * @param shipping
+     * @param contract
      */
-    void update(Shipping shipping);
+    void update(Packing contract);
 
     /**
      * 根据id删除

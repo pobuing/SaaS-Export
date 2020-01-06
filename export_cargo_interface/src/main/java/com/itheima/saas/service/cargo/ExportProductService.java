@@ -1,4 +1,4 @@
-package com.itheima.saas.service.stat.cargo;
+package com.itheima.saas.service.cargo;
 
 
 import com.itheima.saas.domain.cargo.ExportProduct;

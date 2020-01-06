@@ -1,4 +1,4 @@
-package com.itheima.saas.service.stat.cargo;
+package com.itheima.saas.service.cargo;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.itheima.saas.dao.cargo.FactoryDao;

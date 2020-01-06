@@ -2,11 +2,8 @@ package com.itheima.saas.web.controller.cargo;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
-import com.itheima.saas.common.utils.MailUtil;
-import com.itheima.saas.domain.cargo.ExportExample;
-import com.itheima.saas.domain.cargo.Shipping;
-import com.itheima.saas.domain.cargo.ShippingExample;
-import com.itheima.saas.service.stat.cargo.ShippingService;
+import com.itheima.saas.domain.cargo.*;
+import com.itheima.saas.service.cargo.*;
 import com.itheima.saas.web.controller.BaseController;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author wangxin
@@ -30,6 +28,14 @@ public class ShippingController extends BaseController {
     private AmqpTemplate amqpTemplate;
     @Reference
     private ShippingService shippingService;
+    @Reference
+    private PackingService packingService;
+    @Reference
+    private ExportService exportService;
+    @Reference
+    private ContractService contractService;
+    @Reference
+    private InvoiceService invoiceService;
 
     @RequestMapping("/list")
     public String list(@RequestParam(defaultValue = "1") int page,
@@ -60,9 +66,21 @@ public class ShippingController extends BaseController {
         //改变状态
         shipping.setState(1L);
         //保存数据
-        shippingService.update(shipping);
+//        shippingService.update(shipping);
+        //存储发票数据
+        Invoice invoice = new Invoice();
+        //创建单号
+        invoice.setInvoiceId(UUID.randomUUID().toString());
+        invoice.setShippingId(shipping.getShippingId());
+        invoice.setTranscompanyName(shipping.getTranscompanyName());
+        invoice.setCompanyId(companyId);
+        invoice.setCompanyName(companyName);
+//        invoiceService.accounting(invoice);
+        //结算
+        accounting(invoice);
+        //插入数据库
+        invoiceService.save(invoice);
         // TODO: 发送邮件
-        //发送邮件
         String to = shipping.getReceiverEmail();
         String subject = "SaaS-Export委托单";
         String content = "您使用的SaaS-Export平台通过：" +
@@ -73,19 +91,12 @@ public class ShippingController extends BaseController {
                 "创建人：" + shipping.getCreateBy() +
                 "创建时间：" + shipping.getCreateTime();
         System.out.println("邮件内容||" + to + "||" + subject + "||" + content);
-       /* try {
-            MailUtil.sendMsg(to, subject, content);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+
 
         //将邮件内容写入到rabbitMQ中
-        /**
-         * 两个参数：1、routingKey：队列名称，对应于配置文件中的队列名
-         *          2、传入的发送的消息参数
-         */
 
-        Map map = new HashMap();
+
+        Map<String, String> map = new HashMap<String, String>();
         map.put("to", to);
         map.put("subject", subject);
         map.put("content", content);
@@ -94,4 +105,41 @@ public class ShippingController extends BaseController {
         return "redirect:/cargo/shipping/list.do";
     }
 
+    /**
+     * 结算--发票
+     *
+     * @param invoice
+     */
+    public void accounting(Invoice invoice) {
+        System.out.println("*****" + invoice);
+
+        Double totalPrice = 0.0d;
+        //取出委托单
+        String shippingId = invoice.getShippingId();
+        //根据委托单查询装箱数据
+        Shipping shipping = shippingService.findById(shippingId);
+        //获取装箱id
+        String packingIds = shipping.getPackingIds();
+        Packing packing = packingService.findById(packingIds);
+        //获取箱子中的报运单
+        String exportIds = packing.getExportIds();
+        String[] exportArr = exportIds.split(",");
+        //遍历报运单获取每个报运单中的合同
+        for (String exportId : exportArr) {
+            //得到报运单
+            Export export = exportService.findById(exportId);
+            //获取报运单的id
+            String contractIds = export.getContractIds();
+            //拆分id
+            String[] contractArr = contractIds.split(",");
+            for (String contractId : contractArr) {
+                Contract contract = contractService.findById(contractId);
+                //获取合同价格
+                Double totalAmount = contract.getTotalAmount();
+                totalPrice += totalAmount;
+            }
+        }
+        //设置发票金额
+        invoice.setTotalPrices(String.valueOf(totalPrice));
+    }
 }

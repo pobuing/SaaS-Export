@@ -1,12 +1,9 @@
-package com.itheima.saas.service.stat.cargo;
+package com.itheima.saas.service.cargo;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.itheima.saas.dao.cargo.PackingDao;
 import com.itheima.saas.dao.cargo.ShippingDao;
-import com.itheima.saas.domain.cargo.Packing;
-import com.itheima.saas.domain.cargo.PackingExample;
 import com.itheima.saas.domain.cargo.Shipping;
 import com.itheima.saas.domain.cargo.ShippingExample;
 import org.springframework.beans.factory.annotation.Autowired;
