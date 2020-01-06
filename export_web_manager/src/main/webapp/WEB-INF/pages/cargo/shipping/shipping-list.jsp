@@ -23,14 +23,16 @@
 
     function submit() {
         var id = getCheckId()
-        if(id) {
-            location.href="${ctx}/cargo/shipping/submit.do?id="+id;
-        }else{
+        if (id) {
+            location.href = "${ctx}/cargo/shipping/submit.do?id=" + id;
+        } else {
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
     }
 
-
+    function catMapView() {
+        window.open("${ctx}/map.html");
+    }
 
 
 </script>
@@ -65,22 +67,23 @@
                     <div class="pull-left">
                         <div class="form-group form-inline">
                             <div class="btn-group">
-                               <%-- <button type="button" class="btn btn-default" title="删除"
-                                        onclick='createBox()'><i
-                                        class="fa fa-trash-o"></i> 新建装箱
-                                </button>--%>
+                                <%-- <button type="button" class="btn btn-default" title="删除"
+                                         onclick='createBox()'><i
+                                         class="fa fa-trash-o"></i> 新建装箱
+                                 </button>--%>
                                 <button type="button" class="btn btn-default" title="提交"
                                         onclick='submit()'><i
                                         class="fa fa-file-o"></i> 提交委托
                                 </button>
-                                <%--<button type="button" class="btn btn-default" title="取消"
-                                        onclick='checkStatOp("cancel")'><i
-                                        class="fa fa-file-o"></i> 取消
+                                <button type="button" class="btn btn-default" title="取消"
+                                        onclick='catMapView()'><i
+                                        class="fa fa-file-o"></i> 查看地图路线
                                 </button>
-                                <button type="button" class="btn btn-default" title="电子报运"
-                                        onclick='checkStatOp("exportE")'><i
-                                        class="fa fa-refresh"></i> 电子报运
-                                </button>--%>
+                                <%--
+                             <button type="button" class="btn btn-default" title="电子报运"
+                                     onclick='checkStatOp("exportE")'><i
+                                     class="fa fa-refresh"></i> 电子报运
+                             </button>--%>
                             </div>
                         </div>
                     </div>

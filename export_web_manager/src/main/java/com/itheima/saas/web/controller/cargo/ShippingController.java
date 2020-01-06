@@ -141,4 +141,9 @@ public class ShippingController extends BaseController {
         //设置发票金额
         invoice.setTotalPrices(String.valueOf(totalPrice));
     }
+
+
+
+
+
 }
