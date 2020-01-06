@@ -58,6 +58,18 @@
         }
     }
 
+    function getCheckIds() {
+        var ids = '';
+        $.each($('input:checkbox:checked'), function (i) {
+            ids = ids + $(this).val();
+            if (i != $('input[type=checkbox]:checked').length - 1) {
+                //最后一条
+                ids += ',';
+            }
+        });
+        return ids;
+    }
+
     function markBox() {
         var id = getCheckIds();
         console.log(id);
@@ -68,18 +80,6 @@
         }
     }
 
-    function getCheckIds() {
-        var size = $("input:checkbox:checked").length;
-        var ids;
-        for (let i = 0; i < size; i++) {
-            ids = ids + $('input[type=checkbox]:checked').val();
-            if (i != size - 1) {
-                //最后一条
-                ids += ',';
-            }
-        }
-        return ids;
-    }
 
     //   查询当前报运状态
     function checkStatOp(opType) {
@@ -194,7 +194,7 @@
                             <th class="sorting">运输方式</th>
                             <th class="sorting">价格条件</th>
                             <th class="sorting">状态</th>
-<%--                            <th class="text-center">操作</th>--%>
+                            <%--                            <th class="text-center">操作</th>--%>
                         </tr>
                         </thead>
                         <tbody>
@@ -216,13 +216,13 @@
                                     <c:if test="${o.state==1}"><font color="green">已上报</font></c:if>
                                     <c:if test="${o.state==2}"><font color="red">已报运</font></c:if>
                                 </td>
-                               <%-- <td>
-                                    <a href="${ctx }/cargo/export/toView.do?id=${o.id}">[查看]</a>
-                                    <a href="${ctx }/cargo/export/toUpdate.do?id=${o.id}">[编辑]</a>
-                                    <c:if test="${o.state==2}">
-                                        <a href="${ctx}/cargo/export/exportPdf.do?id=${o.id}">[下载]</a>
-                                    </c:if>
-                                </td>--%>
+                                    <%-- <td>
+                                         <a href="${ctx }/cargo/export/toView.do?id=${o.id}">[查看]</a>
+                                         <a href="${ctx }/cargo/export/toUpdate.do?id=${o.id}">[编辑]</a>
+                                         <c:if test="${o.state==2}">
+                                             <a href="${ctx}/cargo/export/exportPdf.do?id=${o.id}">[下载]</a>
+                                         </c:if>
+                                     </td>--%>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -110,7 +110,7 @@ public class PackingController extends BaseController {
         //改变箱子状态
         String[] split = id.split(",");
         for (String packingId : split) {
-            Packing packing = packingService.findById(id);
+            Packing packing = packingService.findById(packingId);
             //设置箱子为已委托
             packing.setState(2l);
             packingService.update(packing);

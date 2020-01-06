@@ -32,7 +32,7 @@ public class MailUtil {
         MimeMessage message = new MimeMessage(session);
 
         //4.设置消息的发送者
-        Address fromAddr = new InternetAddress("itcastsli33t@sina.com");
+        Address fromAddr = new InternetAddress("saas_export@sina.com");
         message.setFrom(fromAddr);
 
         //5.设置消息的接收者
@@ -53,7 +53,7 @@ public class MailUtil {
         //8.准备发送，得到火箭
         Transport transport = session.getTransport("smtp");
         //9.设置火箭的发射目标
-        transport.connect("smtp.sina.com", "itcastsli33t@sina.com", "60325193389a02b6");
+        transport.connect("smtp.sina.com", "saas_export@sina.com", "0f77926d0ab0a12d");
         //10.发送
         transport.sendMessage(message, message.getAllRecipients());
 
@@ -62,7 +62,7 @@ public class MailUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        MailUtil.sendMsg("sli33t@163.com", "今晚八点约陈伟霆", "左手和我一起画个龙，右手画一道彩虹，走起！");
+        MailUtil.sendMsg("wangxin2006@qq.com", "今晚八点约陈伟霆", "左手和我一起画个龙，右手画一道彩虹，走起！");
     }
 
 }

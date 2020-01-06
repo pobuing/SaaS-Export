@@ -3,18 +3,6 @@ function setSidebarActive(th) {
     $(th).parent("li").addClass("active");
 }
 
-function getCheckIds() {
-    var size = $("input:checkbox:checked").length;
-    var ids;
-    for (let i = 0; i < size; i++) {
-        ids = ids + $('input[type=checkbox]:checked').val();
-        if (i != size - 1) {
-            //最后一条
-            ids += ',';
-        }
-    }
-    return ids;
-}
 
 function getCheckId() {
     var size = $("input:checkbox:checked").length;

@@ -19,31 +19,18 @@
     <script src="${ctx}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 </head>
 <script>
-    function createBox() {
-        location.href = "${ctx}/cargo/packing/exportlist.do";
-    }
 
-    function getCheckIds() {
-        var ids = '';
-        $.each($('input:checkbox:checked'), function (i) {
-            ids = ids + $(this).val();
-            if (i != $('input[type=checkbox]:checked').length - 1) {
-                //最后一条
-                ids += ',';
-            }
-        });
-        return ids;
-    }
 
-    function forwardingorder() {
-        var id = getCheckIds();
-        console.log(id);
-        if (id) {
-            location.href = "${ctx}/cargo/packing/forwardOder.do?id=" + id;
-        } else {
-            alert("选择错误");
+    function submit() {
+        var id = getCheckId()
+        if(id) {
+            location.href="${ctx}/cargo/shipping/submit.do?id="+id;
+        }else{
+            alert("请勾选待处理的记录，且每次只能勾选一个")
         }
     }
+
+
 
 
 </script>
@@ -51,8 +38,8 @@
 <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
     <section class="content-header">
         <h1>
-            装箱管理
-            <small>装箱列表</small>
+            委托管理
+            <small>委托列表</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
@@ -66,7 +53,7 @@
         <!-- .box-body -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">装箱列表</h3>
+                <h3 class="box-title">委托列表</h3>
             </div>
 
             <div class="box-body">
@@ -78,13 +65,13 @@
                     <div class="pull-left">
                         <div class="form-group form-inline">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" title="删除"
+                               <%-- <button type="button" class="btn btn-default" title="删除"
                                         onclick='createBox()'><i
                                         class="fa fa-trash-o"></i> 新建装箱
-                                </button>
+                                </button>--%>
                                 <button type="button" class="btn btn-default" title="提交"
-                                        onclick='forwardingorder()'><i
-                                        class="fa fa-file-o"></i> 委托运输
+                                        onclick='submit()'><i
+                                        class="fa fa-file-o"></i> 提交委托
                                 </button>
                                 <%--<button type="button" class="btn btn-default" title="取消"
                                         onclick='checkStatOp("cancel")'><i
@@ -110,10 +97,13 @@
                         <thead>
                         <tr>
                             <td><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
-                            <th class="sorting">箱号</th>
-                            <th class="sorting">买方</th>
-                            <th class="sorting">卖方</th>
+                            <th class="sorting">单号</th>
+                            <th class="sorting">承运方</th>
+                            <th class="sorting">出发地</th>
                             <%--                            <th class="sorting">报运单号</th>--%>
+                            <th class="sorting">目的地</th>
+                            <th class="sorting">收件人</th>
+                            <th class="sorting">邮箱</th>
                             <th class="sorting">创建人</th>
                             <th class="sorting">创建时间</th>
                             <th class="sorting">状态</th>
@@ -123,17 +113,19 @@
                         <tbody>
                         <c:forEach items="${page.list}" var="o" varStatus="status">
                             <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'">
-                                <td><input type="checkbox" name="id" value="${o.packingListId}"/></td>
-                                <td>${o.packingListId}</td>
-                                <td>${o.seller}</td>
-                                <td>${o.buyer}</td>
+                                <td><input type="checkbox" name="id" value="${o.shippingId}"/></td>
+                                <td>${o.shippingId}</td>
+                                <td>${o.transcompanyName}</td>
+                                <td>${o.fromPort}</td>
                                     <%--                                <td>${o.exportIds}</td>--%>
+                                <td>${o.toPort}</td>
+                                <td>${o.receiverName}</td>
+                                <td>${o.receiverEmail}</td>
                                 <td>${o.createBy}</td>
                                 <td>${o.createTime}</td>
                                 <td>
                                     <c:if test="${o.state==0}">草稿</c:if>
-                                    <c:if test="${o.state==1}"><font color="green">已装箱</font></c:if>
-                                    <c:if test="${o.state==2}"><font color="orange">已委托</font></c:if>
+                                    <c:if test="${o.state==1}"><font color="#ff4500">已委托</font></c:if>
                                         <%--                                    <c:if test="${o.state==2}"><font color="red">已报运</font></c:if>--%>
                                 </td>
                                     <%--

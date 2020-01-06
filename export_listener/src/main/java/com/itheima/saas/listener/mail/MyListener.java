@@ -16,7 +16,7 @@ import java.util.Map;
 public class MyListener implements MessageListener {
 
     public void onMessage(Message message) {
-        System.out.println(message.getBody());
+        System.out.println("*****mail listener"+message.getBody());
 
         String msg = new String(message.getBody());
         Map map = JSONObject.parseObject(msg, Map.class);
