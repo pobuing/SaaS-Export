@@ -22,6 +22,8 @@
         <module>export_stat_interface</module>
         <module>export_stat_service</module>
         <module>export_listener</module>
+        <module>export_systemcode_interface</module>
+        <module>export_systemcode_service</module>
     </modules>
 
 
@@ -380,6 +382,24 @@
             <artifactId>pagehelper</artifactId>
             <version>${pagehelper.version}</version>
         </dependency>
-    </dependencies>
+<!--        okhttp-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.11.0</version>
 
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.android</groupId>
+                    <artifactId>android</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+<!--fastjson-->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.41</version>
+    </dependency>
+    </dependencies>
 </project>

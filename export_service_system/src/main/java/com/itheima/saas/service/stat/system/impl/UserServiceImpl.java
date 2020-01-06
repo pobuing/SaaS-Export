@@ -54,4 +54,9 @@ public class UserServiceImpl implements IUserService {
     public User findByEmail(String email) {
         return userDao.findByEmail(email);
     }
+
+    @Override
+    public User findByOpenId(String openId) {
+        return userDao.findByOpenId(openId);
+    }
 }

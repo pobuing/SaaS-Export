@@ -22,4 +22,6 @@ public interface IUserService {
     PageInfo<User> findAll(int page,int size,String companyId);
 
     User findByEmail(String email);
+
+    User findByOpenId(String openId);
 }

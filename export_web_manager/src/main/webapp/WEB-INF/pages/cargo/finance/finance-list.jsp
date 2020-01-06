@@ -95,7 +95,7 @@
                         <thead>
                         <tr>
                             <td><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
-                            <th class="sorting">财务号</th>
+<%--                            <th class="sorting">财务号</th>--%>
                             <th class="sorting">关联发票号</th>
                             <th class="sorting">合同号</th>
                             <%--                            <th class="sorting">报运单号</th>--%>
@@ -110,7 +110,7 @@
                         <c:forEach items="${page.list}" var="o" varStatus="status">
                             <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'">
                                 <td><input type="checkbox" name="id" value="${o.financeId}"/></td>
-                                <td>${o.financeId}</td>
+<%--                                <td>${o.financeId}</td>--%>
                                 <td>${o.incoiceId}</td>
                                 <td>${o.contractNo}</td>
                                     <%--                                <td>${o.exportIds}</td>--%>

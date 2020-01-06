@@ -28,4 +28,5 @@ public interface UserDao {
 
     User findByEmail(String email);
 
+    User findByOpenId(String openId);
 }

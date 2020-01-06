@@ -34,6 +34,6 @@ public class FinanceController extends BaseController {
         PageInfo pageInfo = financeService.findAll(financeExample,
                 page, size);
         request.setAttribute("page", pageInfo);
-        return "cargo/invoice/invoice-list";
+        return "cargo/finance/finance-list";
     }
 }

@@ -63,6 +63,16 @@ public class User implements Serializable {
      */ 
     private String telephone;
 
+    private String openid;
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
     /**
      * 0作为内部控制，租户企业不能使用
      *      0-saas管理员

@@ -18,8 +18,10 @@
         <module name="export_cargo_service" />
         <module name="export_stat_interface" />
         <module name="export_common" />
+        <module name="export_systemcode_interface" />
         <module name="export_packing_service" />
         <module name="export_service_system" />
+        <module name="export_systemcode_service" />
         <module name="export-web-manager" />
         <module name="export_web_manager" />
         <module name="export_cargo_interface" />

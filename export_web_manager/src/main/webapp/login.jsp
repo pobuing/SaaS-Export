@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html>
 <html>
 
@@ -21,6 +21,7 @@
             window.top.location = "/login.jsp";
         }
     }
+
 </script>
 
 <body class="hold-transition login-page">
@@ -54,7 +55,8 @@
         <div class="social-auth-links text-center">
             <p>- 或者 -</p>
             <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-qq"></i> 腾讯QQ用户登录</a>
-            <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-weixin"></i> 微信用户登录</a>
+            <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-weixin"
+                                                                                onclick="wxLogin()"></i> 微信用户登录</a>
         </div>
         <div id="login_container"></div>
     </div>
@@ -65,16 +67,16 @@
 <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script>
     var obj = new WxLogin({
-        self_redirect:false,
-        id:"login_container",
+        self_redirect: false,
+        id: "login_container",
         appid: "wx3bdb1192c22883f3",
         scope: "snsapi_login",
-        redirect_uri: "http://note.java.itcast.cn/weixinlogin"
+        redirect_uri: "http://note.java.itcast.cn/loginwx.do"
     });
 </script>
 
 <script>
-    $(function() {
+    $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',

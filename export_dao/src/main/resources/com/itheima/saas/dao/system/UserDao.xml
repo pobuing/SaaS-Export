@@ -73,5 +73,9 @@ insert into pe_user (user_id, dept_id, email, user_name, password, state, compan
     <select id="findByEmail" parameterType="string" resultMap="BaseResultMap">
         SELECT * FROM pe_user WHERE email = #{email}
     </select>
+    <!--    根据openid查询用户信息-->
+    <select id="findByOpenId" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM pe_user WHERE openid = #{openid}
+    </select>
 
 </mapper>
