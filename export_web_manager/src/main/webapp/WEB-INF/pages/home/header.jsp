@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
-<%@ include file="../base.jsp"%>
+<%@ include file="../base.jsp" %>
 <header class="main-header">
     <a href="all-admin-index.html" class="logo">
         <span class="logo-mini"><img src="${ctx}/img/logo.png"></span>
@@ -107,7 +107,8 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may not
+                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may
+                                        not
                                         fit into the page and may cause design problems
                                     </a>
                                 </li>
@@ -150,7 +151,9 @@
                                             <small class="pull-right">20%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                 aria-valuemax="100">
                                                 <span class="sr-only">20% Complete</span>
                                             </div>
                                         </div>
@@ -165,7 +168,9 @@
                                             <small class="pull-right">40%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-green" style="width: 40%"
+                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                 aria-valuemax="100">
                                                 <span class="sr-only">40% Complete</span>
                                             </div>
                                         </div>
@@ -180,7 +185,9 @@
                                             <small class="pull-right">60%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-red" style="width: 60%"
+                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                 aria-valuemax="100">
                                                 <span class="sr-only">60% Complete</span>
                                             </div>
                                         </div>
@@ -195,7 +202,9 @@
                                             <small class="pull-right">80%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-yellow" style="width: 80%"
+                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                 aria-valuemax="100">
                                                 <span class="sr-only">80% Complete</span>
                                             </div>
                                         </div>
@@ -241,7 +250,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">修改密码</a>
+                                <a href="${ctx}/system/user/toModifyPwd.do" class="btn btn-default btn-flat">修改密码</a>
                             </div>
                             <div class="pull-right">
                                 <a href="/logout.do" class="btn btn-default btn-flat">注销</a>
@@ -249,6 +258,7 @@
                         </li>
                     </ul>
                 </li>
+
 
             </ul>
         </div>

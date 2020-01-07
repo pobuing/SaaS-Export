@@ -82,13 +82,13 @@ public class ShippingController extends BaseController {
         // TODO: 发送邮件
         String to = shipping.getReceiverEmail();
         String subject = "SaaS-Export委托单";
-        String content = "您使用的SaaS-Export平台通过：" +
-                "委托单号：" + shipping.getShippingId() +
-                "报运单号" + shipping.getPackingIds() +
-                "出发地：" + shipping.getFromPort() +
-                "目的地：" + shipping.getToPort() +
-                "创建人：" + shipping.getCreateBy() +
-                "创建时间：" + shipping.getCreateTime();
+        String content = "\n\r您使用的SaaS-Export平台通过：" +
+                "\n\r委托单号：" + shipping.getShippingId() +
+                "\n\r报运单号" + shipping.getPackingIds() +
+                "\n\r出发地：" + shipping.getFromPort() +
+                "\n\r目的地：" + shipping.getToPort() +
+                "\n\r创建人：" + shipping.getCreateBy() +
+                "\n\r创建时间：" + shipping.getCreateTime();
         System.out.println("邮件内容||" + to + "||" + subject + "||" + content);
 
 

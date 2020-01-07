@@ -144,4 +144,39 @@ public class UserController extends BaseController {
         return "redirect:/system/user/list.do";
     }
 
+
+    @RequestMapping("/toModifyPwd")
+    public String toModifyPwd() {
+        return "system/user/user-modifypassword";
+    }
+
+
+    @RequestMapping(value = "/updatePassword", name = "修改密码")
+    public String updatePassword(String oripwd, String newpwd, String renewpwd) {
+        //验证原密码
+        //旧密码加密后和数据库对比
+        User user = (User) session.getAttribute("loginUser");
+        String encryOriPwd = Encrypt.md5(oripwd, user.getEmail());
+        if (user.getPassword().equals(encryOriPwd)) {
+            //相同对比新密码
+            if (newpwd.equals(renewpwd)) {
+                //加密新密码
+                String encryNewPwd = Encrypt.md5(newpwd, user.getEmail());
+                user.setPassword(encryNewPwd);
+                //更新数据
+                userService.update(user);
+                session.setAttribute("loginUser", user);
+                //修改成功后，跳转回主页
+                return "home/main";
+            } else {
+                request.setAttribute("msg", "两次密码输入不一致");
+                return "system/user/user-modifypassword";
+            }
+        } else {
+            //不相同返回密码错误
+            request.setAttribute("msg", "原密码输入错误");
+            return "system/user/user-modifypassword";
+        }
+
+    }
 }
