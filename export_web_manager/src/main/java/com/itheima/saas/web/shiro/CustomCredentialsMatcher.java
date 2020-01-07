@@ -1,6 +1,7 @@
 package com.itheima.saas.web.shiro;
 
 import com.itheima.saas.common.utils.Encrypt;
+import com.itheima.saas.web.constant.LoginType;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -16,7 +17,11 @@ public class CustomCredentialsMatcher extends SimpleCredentialsMatcher {
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-        UsernamePasswordToken upToke = (UsernamePasswordToken) token;
+        EasyTypeToken upToke = (EasyTypeToken) token;
+        //获取登录方式
+        if (((EasyTypeToken) token).getLoginType()== LoginType.NOPASSWORD) {
+            return true;
+        }
         String userPassword = String.valueOf(upToke.getPassword());
         String email = upToke.getUsername();
         String md5Password = Encrypt.md5(userPassword, email);

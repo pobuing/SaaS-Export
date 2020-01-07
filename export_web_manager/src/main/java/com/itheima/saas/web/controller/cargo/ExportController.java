@@ -136,18 +136,25 @@ public class ExportController extends BaseController {
         /**
          * http://192.168.167.64:8088/ws/export/user
          * http://192.168.167.64:8088/ws/export/user/{id}
-         */
+         */ExportResult exportResult = null;
 
-        //9.调用webservice接口
-        WebClient wc = WebClient.create("http://192.168.167.64:8088/ws/export/user");
-        wc.post(exportVo);
+        try {
+            //9.调用webservice接口
+            WebClient wc = WebClient.create("http://localhost:8070/ws/export/user");
+            wc.post(exportVo);
 
-        wc = WebClient.create("http://192.168.167.64:8088/ws/export/user/" + id);
-        ExportResult exportResult = wc.get(ExportResult.class);
+            wc = WebClient.create("http://localhost:8070/ws/export/user/" + id);
+            exportResult = wc.get(ExportResult.class);
+            exportService.updateE(exportResult);
+
+        } catch (Exception e) {
+            System.out.println("web service异常了");
+            export.setState(2);
+            exportService.update(export);
+        }
 
         //System.out.println(exportResult);
 
-        exportService.updateE(exportResult);
 
         return "redirect:/cargo/export/list.do";
     }

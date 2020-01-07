@@ -134,16 +134,17 @@ public class ShippingController extends BaseController {
             for (String contractId : contractArr) {
                 Contract contract = contractService.findById(contractId);
                 //获取合同价格
-                Double totalAmount = contract.getTotalAmount();
-                totalPrice += totalAmount;
+                if (contract != null) {
+                    Double totalAmount = contract.getTotalAmount();
+                    if (totalAmount != null) {
+                        totalPrice += totalAmount;
+                    }
+                }
             }
         }
         //设置发票金额
         invoice.setTotalPrices(String.valueOf(totalPrice));
     }
-
-
-
 
 
 }

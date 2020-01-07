@@ -22,8 +22,8 @@
         <module>export_stat_interface</module>
         <module>export_stat_service</module>
         <module>export_listener</module>
-        <module>export_systemcode_interface</module>
-        <module>export_systemcode_service</module>
+        <module>export_baseinfo_interface</module>
+        <module>export_baseinfo_service</module>
     </modules>
 
 

@@ -6,6 +6,7 @@ import com.itheima.saas.domain.system.Module;
 import com.itheima.saas.domain.system.User;
 import com.itheima.saas.service.stat.system.IModuleService;
 import com.itheima.saas.service.stat.system.IUserService;
+import com.itheima.saas.web.shiro.EasyTypeToken;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -49,9 +50,10 @@ public class LoginController extends BaseController {
         }
         try {
             Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(email, password);
+
+            EasyTypeToken easyTypeToken = new EasyTypeToken(email, password);
             //将用户输入的信息加入身份认证
-            subject.login(usernamePasswordToken);
+            subject.login(easyTypeToken);
             User user = (User) subject.getPrincipal();
             //设置openid,更新信息
             if (!StringUtils.isEmpty(openid)) {
@@ -104,14 +106,10 @@ public class LoginController extends BaseController {
                     return "forward:login.jsp";
                 } else {
                     Subject subject = SecurityUtils.getSubject();
-                    UsernamePasswordToken usernamePasswordToken =
-                            new UsernamePasswordToken(byOpenId.getEmail(), byOpenId.getPassword());
+                    EasyTypeToken token = new EasyTypeToken(byOpenId.getEmail());
                     //将用户输入的信息加入身份认证
-                    subject.login(usernamePasswordToken);
+                    subject.login(token);
                     User user = (User) subject.getPrincipal();
-
-//        通过邮箱查询数据库 得到用户信息
-//        User user = userService.findByEmail(email);
                     //登录成功 加入session中
                     session.setAttribute("loginUser", user);
                     //登录成功后将对应用户的对应角色的模块信息放入到session中

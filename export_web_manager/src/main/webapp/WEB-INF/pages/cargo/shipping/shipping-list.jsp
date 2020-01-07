@@ -31,7 +31,12 @@
     }
 
     function catMapView() {
-        window.open("${ctx}/map.html");
+        var id = getCheckId()
+        if (id) {
+            window.open("${ctx}/map.html");
+        } else {
+            alert("请勾选待处理的记录，且每次只能勾选一个")
+        }
     }
 
 

@@ -37,6 +37,7 @@
         var myChart = echarts.init(document.getElementById('main'));
 
         // 指定图表的配置项和数据
+
         option = {
             title: {
                 text: '统计分析',

@@ -105,6 +105,8 @@ public class PackingController extends BaseController {
         //设置委托箱子号
         shipping.setPackingIds(id);
         shipping.setState(0L);
+        shipping.setCompanyId(companyId);
+        shipping.setCompanyName(companyName);
         //创建委托单
         shippingService.save(shipping);
         //改变箱子状态

@@ -52,4 +52,9 @@ public class StatController extends BaseController {
     public List<Map> getSellData(){
         return statService.getSellData(companyId);
     }
+
+    @RequestMapping(value = "/toTopVisit")
+    public String toTopVisit(){
+        return "";
+    }
 }
