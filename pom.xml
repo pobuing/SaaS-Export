@@ -15,7 +15,7 @@
         <module>export_domain</module>
         <module>export_common</module>
         <module>export_web_protal</module>
-        <module>export_service_company</module>
+        <module>export_company_service</module>
         <module>export_company_interface</module>
         <module>export_cargo_service</module>
         <module>export_cargo_interface</module>

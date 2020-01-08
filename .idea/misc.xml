@@ -4,7 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/export_baseinfo_service" />
     <file type="web" url="file://$PROJECT_DIR$/export_cargo_service" />
-    <file type="web" url="file://$PROJECT_DIR$/export_service_company" />
+    <file type="web" url="file://$PROJECT_DIR$/export_company_service" />
     <file type="web" url="file://$PROJECT_DIR$/export_stat_service" />
     <file type="web" url="file://$PROJECT_DIR$/export_web_manager" />
     <file type="web" url="file://$PROJECT_DIR$/export_web_protal" />
