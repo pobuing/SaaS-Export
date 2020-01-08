@@ -11,7 +11,7 @@
     <dubbo:registry address="zookeeper://localhost:2181"></dubbo:registry>
 
     <!--dubbo服务提供者开放的端口号-->
-    <dubbo:protocol name="dubbo" port="20883"></dubbo:protocol>
+    <dubbo:protocol name="dubbo" port="20884"></dubbo:protocol>
 
     <!--dubbo的包扫描，主要用于注解-->
     <!--    <dubbo:annotation package="com.itheima.saas.service"></dubbo:annotation>-->

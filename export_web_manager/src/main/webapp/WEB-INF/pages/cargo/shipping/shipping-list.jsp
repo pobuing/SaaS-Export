@@ -30,14 +30,14 @@
         }
     }
 
-    function catMapView() {
-        var id = getCheckId()
-        if (id) {
-            window.open("${ctx}/map.html");
+    /* function catMapView() {
+         var id = getCheckId()
+         if (id) {
+             window.open("${ctx}/map.html");
         } else {
             alert("请勾选待处理的记录，且每次只能勾选一个")
         }
-    }
+    }*/
 
 
 </script>
@@ -80,10 +80,16 @@
                                         onclick='submit()'><i
                                         class="fa fa-file-o"></i> 提交委托
                                 </button>
-                                <button type="button" class="btn btn-default" title="取消"
-                                        onclick='catMapView()'><i
-                                        class="fa fa-file-o"></i> 查看地图路线
-                                </button>
+
+                                <%-- <button type="button" class="btn btn-default" title="取消"
+                                         onclick='catMapView()'><i
+                                         class="fa fa-file-o"></i> 查看地图路线
+                                 </button>--%>
+                                <span type="button" class="btn btn-default" title="取消">
+                                         <a href="${ctx}/map.html" target="iframe">
+                                         <i wclass="fa fa-file-o"></i> 查看地图路线
+                                         </a>
+                                </span>
                                 <%--
                              <button type="button" class="btn btn-default" title="电子报运"
                                      onclick='checkStatOp("exportE")'><i

@@ -5,6 +5,7 @@ import com.itheima.saas.service.stat.SystemLogService;
 import com.itheima.saas.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
@@ -22,10 +23,16 @@ public class SystemLogController extends BaseController {
     private SystemLogService systemLogService;
 
     @RequestMapping("/toTopVisit")
-    public String toTopList() {
+    public String toTopList(){
+        return "system/visitcount/visitcount-sell";
+    }
+
+    @RequestMapping("/selectTopVisit")
+    @ResponseBody
+    public List topList() {
         List<Map<String, String>> list = systemLogService.findIpCount();
-        request.setAttribute("list", list);
-        return "system/visitcount/visitcount-list";
+
+        return list;
     }
 }
 

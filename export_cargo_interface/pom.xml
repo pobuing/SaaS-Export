@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>com.itheima.saas</groupId>
-            <artifactId>saas_domain</artifactId>
+            <artifactId>export_domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

@@ -72,7 +72,7 @@ public class InvoiceController extends BaseController {
         num = exportIds.split(",").length;
         finance.setNum(String.valueOf(num));
         finance.setIncoiceId(invoice.getInvoiceId());
-        finance.setPrice(invoice.getTotalPrices());
+        finance.setPrice(invoice.getGathering());
         finance.setCompanyId(companyId);
         finance.setCompanyName(companyName);
         finance.setConsumerName(shipping.getReceiverName());

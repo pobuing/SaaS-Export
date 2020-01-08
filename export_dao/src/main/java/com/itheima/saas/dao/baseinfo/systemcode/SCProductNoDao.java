@@ -61,4 +61,7 @@ public interface SCProductNoDao {
      * @mbg.generated
      */
     int updateByPrimaryKey(SCProductNo record);
+
+
+
 }

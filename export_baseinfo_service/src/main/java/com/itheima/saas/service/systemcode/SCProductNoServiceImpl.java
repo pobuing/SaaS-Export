@@ -42,4 +42,9 @@ public class SCProductNoServiceImpl implements SCProductNoService {
     public void delete(String id) {
         scProductNoDao.deleteByPrimaryKey(id);
     }
+
+    public List<SCProductNo> findProductsByFactoryId(SCProductNoExample example) {
+        List<SCProductNo> productNoList = scProductNoDao.selectByExample(example);
+        return productNoList;
+    }
 }

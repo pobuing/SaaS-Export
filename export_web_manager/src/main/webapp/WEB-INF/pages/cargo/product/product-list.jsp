@@ -16,6 +16,40 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
+
+    <script>
+        $(function () {
+            $("#factoryInfo").change(function () {
+                //获取选择的厂家id
+                let factoryId = this.value;
+                console.log(factoryId);
+                //清空货号信息
+                $("productNo").empty();
+                //ajax查看货物
+                $.ajax({
+                    //请求方式
+                    type: "POST",
+                    //请求地址
+                    url: "${ctx}/baseinfo/systemcode/findProNoByfactoryId.do",
+                    //数据，json字符串
+                    data: {'factoryId': factoryId},
+                    dataType: "json",
+                    //请求成功
+                    success: function (result) {
+                        console.log(result);
+                        $.each(result, function (i, n) {
+
+                            $("#productNo").append("<option value="+n.productnum+">"+n.productnum+"</option>")
+                            console.log(i);
+                            console.log(n);
+
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
 </head>
 <body>
 <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
@@ -53,15 +87,22 @@
                                 onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
                             <option value="">请选择</option>
                             <c:forEach items="${factoryList}" var="factory">
-                                <option value="${factory.id}">${factory.factoryName}</option>
+                                <option value="${factory.id}" ${contractProduct.factoryId eq factory.id ? "selected" : ""}>
+                                        ${factory.factoryName}
+                                </option>
                             </c:forEach>
                         </select>
                     </div>
 
                     <div class="col-md-2 title">货号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="货号" name="productNo"
-                               value="${contractProduct.productNo}">
+                        <select class="form-control" name="productNo" id="productNo"
+                                onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
+                            <option value="">请选择</option>
+
+                        </select>
+                        <%--<input type="text" class="form-control" placeholder="货号" name="productNo"
+                               value="${contractProduct.productNo}">--%>
                     </div>
 
                     <div class="col-md-2 title">货物照片</div>

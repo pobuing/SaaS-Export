@@ -8,11 +8,12 @@ import com.itheima.saas.dao.cargo.*;
 import com.itheima.saas.domain.cargo.*;
 import com.itheima.saas.domain.vo.ExportProductResult;
 import com.itheima.saas.domain.vo.ExportResult;
-import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ExportServiceImpl implements ExportService {
@@ -72,13 +73,7 @@ public class ExportServiceImpl implements ExportService {
                 ExportProduct exportProduct = new ExportProduct();
                 //10、将合同货物信息写入到报运商品信息
                 //exportProduct.setProductNo(contractProduct.getProductNo());
-                try {
-                    BeanUtils.copyProperties(contractProduct, exportProduct);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+                BeanUtils.copyProperties(contractProduct, exportProduct);
                 //11、设置报运单exportId
                 exportProduct.setExportId(export.getId());
                 //12、设置报运商品的id
@@ -102,13 +97,7 @@ public class ExportServiceImpl implements ExportService {
                     //17、创建报运附件实体类
                     ExtEproduct extEproduct = new ExtEproduct();
                     //18、将合同附件信息写入到报运附件信息
-                    try {
-                        BeanUtils.copyProperties(extCproduct, extEproduct);
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
+                    BeanUtils.copyProperties(extCproduct, extEproduct);
                     //19、设置报运单exportId
                     extEproduct.setExportId(export.getId());
                     //20、设置报运单商品exportProductId

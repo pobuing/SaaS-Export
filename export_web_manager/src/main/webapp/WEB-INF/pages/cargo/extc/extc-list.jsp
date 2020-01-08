@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ include file="../../base.jsp"%>
+<%@ include file="../../base.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +16,39 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <!-- 页面meta /-->
+    <script>
+        $(function () {
+            $("#factoryInfo").change(function () {
+                //获取选择的厂家id
+                let factoryId = this.value;
+                console.log(factoryId);
+                //清空货号信息
+                $("productNo").empty();
+                //ajax查看货物
+                $.ajax({
+                    //请求方式
+                    type: "POST",
+                    //请求地址
+                    url: "${ctx}/baseinfo/systemcode/findProNoByfactoryId.do",
+                    //数据，json字符串
+                    data: {'factoryId': factoryId},
+                    dataType: "json",
+                    //请求成功
+                    success: function (result) {
+                        console.log(result);
+                        $.each(result, function (i, n) {
+
+                            $("#productNo").append("<option value=" + n.productnum + ">" + n.productnum + "</option>")
+                            console.log(i);
+                            console.log(n);
+
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
 </head>
 <body>
 <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
@@ -42,11 +75,11 @@
             <form id="editForm" action="${ctx}/cargo/extCproduct/edit.do" method="post" enctype="multipart/form-data">
                 <input type="text" name="contractProductId" value="${contractProductId}">
                 <input type="text" name="contractId" value="${contractId}">
-                <input type="text"  name="factoryName" id="factoryName">
+                <input type="text" name="factoryName" id="factoryName">
                 <div class="row data-type" style="margin: 0px">
                     <div class="col-md-2 title">生产厂家</div>
                     <div class="col-md-4 data">
-                        <select class="form-control"  name="factoryId" id="factoryInfo" onchange="changeSelect()">
+                        <select class="form-control" name="factoryId" id="factoryInfo" onchange="changeSelect()">
                             <option value="">请选择</option>
                             <c:forEach items="${factoryList}" var="factory">
                                 <option value="${factory.id}">${factory.factoryName}</option>
@@ -54,8 +87,8 @@
                         </select>
 
                         <script>
-                            function changeSelect(){
-                                var selectObj =  document.getElementById('factoryInfo');
+                            function changeSelect() {
+                                var selectObj = document.getElementById('factoryInfo');
                                 var index = selectObj.selectedIndex;
                                 var str = selectObj.options[index].text;
                                 document.getElementById("factoryName").value = str;
@@ -65,32 +98,39 @@
 
                     <div class="col-md-2 title">货号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="货号" name="productNo" value="${extCproduct.productNo}">
+                        <select class="form-control" name="productNo" id="productNo"
+                                onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
+                            <option value="">请选择</option>
+                        </select>
                     </div>
 
                     <div class="col-md-2 title">货物照片</div>
                     <div class="col-md-4 data">
-                        <input type="file" class="form-control" placeholder="请选择" name="productPhoto" >
+                        <input type="file" class="form-control" placeholder="请选择" name="productPhoto">
                     </div>
 
                     <div class="col-md-2 title">数量</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="数量" name="cnumber" value="${extCproduct.cnumber}">
+                        <input type="text" class="form-control" placeholder="数量" name="cnumber"
+                               value="${extCproduct.cnumber}">
                     </div>
 
                     <div class="col-md-2 title">包装单位</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="包装单位" name="packingUnit" value="${extCproduct.packingUnit}">
+                        <input type="text" class="form-control" placeholder="包装单位" name="packingUnit"
+                               value="${extCproduct.packingUnit}">
                     </div>
 
                     <div class="col-md-2 title">单价</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="单价" name="price" value="${extCproduct.price}">
+                        <input type="text" class="form-control" placeholder="单价" name="price"
+                               value="${extCproduct.price}">
                     </div>
 
                     <div class="col-md-2 title">排序号</div>
                     <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="排序号" name="orderNo" value="${extCproduct.orderNo}">
+                        <input type="text" class="form-control" placeholder="排序号" name="orderNo"
+                               value="${extCproduct.orderNo}">
                     </div>
 
                     <div class="col-md-2 title"></div>
@@ -99,12 +139,14 @@
 
                     <div class="col-md-2 title rowHeight2x">货物描述</div>
                     <div class="col-md-4 data  rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="货物描述" name="productDesc">${extCproduct.productDesc}</textarea>
+                        <textarea class="form-control" rows="3" placeholder="货物描述"
+                                  name="productDesc">${extCproduct.productDesc}</textarea>
                     </div>
 
                     <div class="col-md-2 title rowHeight2x">要求</div>
                     <div class="col-md-4 data  rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="要求" name="productRequest">${extCproduct.productRequest}</textarea>
+                        <textarea class="form-control" rows="3" placeholder="要求"
+                                  name="productRequest">${extCproduct.productRequest}</textarea>
                     </div>
                 </div>
             </form>
@@ -113,7 +155,8 @@
 
         <!--工具栏-->
         <div class="box-tools text-center">
-            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存</button>
+            <button type="button" onclick='document.getElementById("editForm").submit()' class="btn bg-maroon">保存
+            </button>
             <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
         </div>
         <!--工具栏/-->
@@ -135,23 +178,24 @@
                 <div class="table-box">
                     <!--数据列表-->
                     <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-                            <thead>
-                            <tr>
-                                <td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
-                                <td class="tableHeader">序号</td>
-                                <td class="tableHeader">厂家</td>
-                                <td class="tableHeader">货号</td>
-                                <td class="tableHeader">包装单位</td>
-                                <td class="tableHeader">数量</td>
-                                <td class="tableHeader">单价</td>
-                                <td class="tableHeader">总金额</td>
+                        <thead>
+                        <tr>
+                            <td class="tableHeader"><input type="checkbox" name="selid" onclick="checkAll('id',this)">
+                            </td>
+                            <td class="tableHeader">序号</td>
+                            <td class="tableHeader">厂家</td>
+                            <td class="tableHeader">货号</td>
+                            <td class="tableHeader">包装单位</td>
+                            <td class="tableHeader">数量</td>
+                            <td class="tableHeader">单价</td>
+                            <td class="tableHeader">总金额</td>
                             <td class="tableHeader">操作</td>
                         </tr>
                         </thead>
-                        <tbody class="tableBody" >
+                        <tbody class="tableBody">
                         ${links }
                         <c:forEach items="${page.list}" var="o" varStatus="status">
-                            <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'" >
+                            <tr class="odd" onmouseover="this.className='highlight'" onmouseout="this.className='odd'">
                                 <td><input type="checkbox" name="id" value="${o.id}"/></td>
                                 <td>${status.index+1}</td>
                                 <td>${o.factoryName}</td>

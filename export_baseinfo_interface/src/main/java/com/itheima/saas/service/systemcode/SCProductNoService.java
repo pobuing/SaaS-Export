@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.itheima.saas.domain.baseinfo.systemcode.SCProductNo;
 import com.itheima.saas.domain.baseinfo.systemcode.SCProductNoExample;
 
+import java.util.List;
+
 /**
  * @author wangxin
  * @date 2020/1/3 15:25
@@ -49,4 +51,6 @@ public interface SCProductNoService {
      * @param id
      */
     void delete(String id);
+
+    List<SCProductNo> findProductsByFactoryId(SCProductNoExample example);
 }

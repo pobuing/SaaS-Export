@@ -1,6 +1,7 @@
 package com.itheima.saas.web.controller.baseinfo;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.itheima.saas.domain.baseinfo.systemcode.SCProductNo;
 import com.itheima.saas.domain.baseinfo.systemcode.SCProductNoExample;
@@ -12,6 +13,7 @@ import com.itheima.saas.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.UUID;
@@ -62,5 +64,19 @@ public class SystemCodeController extends BaseController {
         //存入数据库
         scProductNoService.save(scProductNo);
         return "redirect:/baseinfo/systemcode/list.do";
+    }
+
+
+    @RequestMapping("/findProNoByfactoryId")
+    @ResponseBody
+    public String factoryId(String factoryId) {
+        SCProductNoExample scProductNoExample = new SCProductNoExample();
+        //设置条件
+        SCProductNoExample.Criteria criteria = scProductNoExample.createCriteria();
+        criteria.andFactoryIdEqualTo(factoryId);
+        List<SCProductNo> list = scProductNoService.findProductsByFactoryId(scProductNoExample);
+        String jsonString = JSONObject.toJSONString(list);
+        System.out.println(jsonString);
+        return jsonString;
     }
 }

@@ -78,6 +78,9 @@ public class ContractProductController extends BaseController {
                 e.printStackTrace();
             }
         }
+        //设置工厂名称
+        Factory factory = factoryService.findById(contractProduct.getFactoryId());
+        contractProduct.setFactoryName(factory.getFactoryName());
         if (StringUtils.isEmpty(contractProduct.getId())) {
             contractProduct.setId(UUID.randomUUID().toString());
             //保存数据
@@ -134,7 +137,7 @@ public class ContractProductController extends BaseController {
                 contractProduct.setProductNo(row.getCell(2).getStringCellValue());
                 contractProduct.setCnumber((int) row.getCell(3).getNumericCellValue());
                 contractProduct.setPackingUnit(row.getCell(4).getStringCellValue());
-                contractProduct.setLoadingRate(row.getCell(5).getNumericCellValue()+"");
+                contractProduct.setLoadingRate(row.getCell(5).getNumericCellValue() + "");
                 contractProduct.setBoxNum((int) row.getCell(6).getNumericCellValue());
                 contractProduct.setPrice(row.getCell(7).getNumericCellValue());
                 contractProduct.setProductDesc(row.getCell(8).getStringCellValue());
