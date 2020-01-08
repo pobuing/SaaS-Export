@@ -16,10 +16,9 @@
       <module fileurl="file://$PROJECT_DIR$/export_service_system/export_service_system.iml" filepath="$PROJECT_DIR$/export_service_system/export_service_system.iml" />
       <module fileurl="file://$PROJECT_DIR$/export_stat_interface/export_stat_interface.iml" filepath="$PROJECT_DIR$/export_stat_interface/export_stat_interface.iml" />
       <module fileurl="file://$PROJECT_DIR$/export_stat_service/export_stat_service.iml" filepath="$PROJECT_DIR$/export_stat_service/export_stat_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/export_web_chat/export_web_chat.iml" filepath="$PROJECT_DIR$/export_web_chat/export_web_chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/export_web_manager/export_web_manager.iml" filepath="$PROJECT_DIR$/export_web_manager/export_web_manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/export_web_protal/export_web_protal.iml" filepath="$PROJECT_DIR$/export_web_protal/export_web_protal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/export_service_system/src/main/main.iml" filepath="$PROJECT_DIR$/export_service_system/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/export_service_system/src/test/test.iml" filepath="$PROJECT_DIR$/export_service_system/src/test/test.iml" />
     </modules>
   </component>
 </project>

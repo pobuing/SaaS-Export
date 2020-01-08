@@ -474,6 +474,76 @@ public class SCProductNoExample implements Serializable {
             addCriterion("factory_name not between", value1, value2, "factoryName");
             return (Criteria) this;
         }
+
+        public Criteria andPTypeIsNull() {
+            addCriterion("p_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeIsNotNull() {
+            addCriterion("p_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeEqualTo(String value) {
+            addCriterion("p_type =", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeNotEqualTo(String value) {
+            addCriterion("p_type <>", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeGreaterThan(String value) {
+            addCriterion("p_type >", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("p_type >=", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeLessThan(String value) {
+            addCriterion("p_type <", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeLessThanOrEqualTo(String value) {
+            addCriterion("p_type <=", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeLike(String value) {
+            addCriterion("p_type like", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeNotLike(String value) {
+            addCriterion("p_type not like", value, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeIn(List<String> values) {
+            addCriterion("p_type in", values, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeNotIn(List<String> values) {
+            addCriterion("p_type not in", values, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeBetween(String value1, String value2) {
+            addCriterion("p_type between", value1, value2, "pType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPTypeNotBetween(String value1, String value2) {
+            addCriterion("p_type not between", value1, value2, "pType");
+            return (Criteria) this;
+        }
     }
 
     /**

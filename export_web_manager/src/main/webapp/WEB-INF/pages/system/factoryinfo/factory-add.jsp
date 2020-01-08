@@ -55,6 +55,13 @@
                     <div class="col-md-4 data">
                         <input type="text" class="form-control" placeholder="联系人" name="contacts" value="${factory.contacts}">
                     </div>
+                    <div class="col-md-2 title">分类</div>
+                    <div class="col-md-4 data">
+                        <select class="form-control" name="ctype">
+                            <option value="附件">附件</option>
+                            <option value="货物">货物</option>
+                        </select>
+                    </div>
                     <div class="col-md-2 title">电话</div>
                     <div class="col-md-4 data">
                         <input type="text" class="form-control" placeholder="电话" name="mobile" value="${factory.mobile}">

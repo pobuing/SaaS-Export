@@ -23,7 +23,7 @@
         var id = getCheckId()
         if (id) {
             if (confirm("你确认要删除此条记录吗？")) {
-                location.href = "${ctx}/cargo/contract/delete.do?id=" + id;
+                location.href = "${ctx}/baseinfo/systemcode/delete.do?id=" + id;
             }
         } else {
             alert("请勾选待处理的记录，且每次只能勾选一个")
@@ -94,9 +94,9 @@
                                         onclick='location.href="${ctx}/baseinfo/systemcode/toAdd.do"'><i
                                         class="fa fa-file-o"></i> 新建
                                 </button>
-                                <button type="button" class="btn btn-default" title="查看" onclick='view()'><i
+                               <%-- <button type="button" class="btn btn-default" title="查看" onclick='view()'><i
                                         class="fa  fa-eye-slash"></i> 查看
-                                </button>
+                                </button>--%>
                                 <button type="button" class="btn btn-default" title="删除" onclick='deleteById()'><i
                                         class="fa fa-trash-o"></i> 删除
                                 </button>
@@ -121,6 +121,7 @@
                             <th class="sorting">厂家名称</th>
                             <th class="sorting">货号</th>
                             <th class="sorting">货号id</th>
+                            <th class="sorting">分类</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -130,6 +131,7 @@
                                 <td>${o.factoryName}</td>
                                 <td>${o.productnum}</td>
                                 <td>${o.productnumId}</td>
+                                <td>${o.pType}</td>
                                     <%--<td>
                                         &lt;%&ndash;<a href="${ctx }/cargo/contract/toView.do?id=${o.id}">[查看详情]</a>&ndash;%&gt;
                                         <a href="${ctx }/cargo/contract/toUpdate.do?id=${o.id}">[编辑]</a>

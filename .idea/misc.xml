@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/export_cargo_service" />
     <file type="web" url="file://$PROJECT_DIR$/export_company_service" />
     <file type="web" url="file://$PROJECT_DIR$/export_stat_service" />
+    <file type="web" url="file://$PROJECT_DIR$/export_web_chat" />
     <file type="web" url="file://$PROJECT_DIR$/export_web_manager" />
     <file type="web" url="file://$PROJECT_DIR$/export_web_protal" />
   </component>
@@ -15,7 +16,5 @@
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

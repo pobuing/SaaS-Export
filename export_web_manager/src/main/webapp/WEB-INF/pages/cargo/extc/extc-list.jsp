@@ -23,7 +23,7 @@
                 let factoryId = this.value;
                 console.log(factoryId);
                 //清空货号信息
-                $("productNo").empty();
+                $("#productNo").empty();
                 //ajax查看货物
                 $.ajax({
                     //请求方式
@@ -31,7 +31,7 @@
                     //请求地址
                     url: "${ctx}/baseinfo/systemcode/findProNoByfactoryId.do",
                     //数据，json字符串
-                    data: {'factoryId': factoryId},
+                    data: {'factoryId': factoryId, "pType": "附件"},
                     dataType: "json",
                     //请求成功
                     success: function (result) {

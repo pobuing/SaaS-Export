@@ -94,7 +94,7 @@
                     <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
                         <thead>
                         <tr>
-                            <td><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>
+<%--                            <td><input type="checkbox" name="selid" onclick="checkAll('id',this)"></td>--%>
 <%--                            <th class="sorting">财务号</th>--%>
                             <th class="sorting">关联发票号</th>
                             <th class="sorting">合同号</th>
@@ -114,7 +114,7 @@
                                     <%--                                <td>${o.exportIds}</td>--%>
                                 <td>${o.exportNo}</td>
                                 <td>${o.num}</td>
-                                <td>${o.price}￥</td>
+                                <td>￥${o.price}</td>
                                 <td>${o.consumerName}</td>
                                     <%--
                                      货物管理没有操作

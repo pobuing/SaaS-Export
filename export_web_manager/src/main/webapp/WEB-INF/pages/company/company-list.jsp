@@ -107,6 +107,7 @@
                                 <td class="text-center">${item.balance}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/company/toUpdate.do?id=${item.id}"'>编辑</button>
+                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${ctx}/company/toAddCompAdmin.do?id=${item.id}"'>指定系统管理员</button>
                                 </td>
                             </tr>
                         </c:forEach>

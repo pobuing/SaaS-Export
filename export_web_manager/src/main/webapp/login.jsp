@@ -55,13 +55,14 @@
                 </div>
             </div>
         </form>
+        <c:if test="${empty openid}">
+
         <div class="social-auth-links text-center">
             <p>- 或者 -</p>
             <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-qq"></i> 腾讯QQ用户登录</a>
             <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-weixin"
                                                                                 onclick="wxLogin()"></i> 微信用户登录</a>
         </div>
-        <c:if test="${empty openid}">
         <div id="login_container"></div>
         </c:if>
     </div>

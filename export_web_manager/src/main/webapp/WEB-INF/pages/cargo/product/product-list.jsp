@@ -24,7 +24,7 @@
                 let factoryId = this.value;
                 console.log(factoryId);
                 //清空货号信息
-                $("productNo").empty();
+                $("#productNo").empty();
                 //ajax查看货物
                 $.ajax({
                     //请求方式
@@ -32,14 +32,14 @@
                     //请求地址
                     url: "${ctx}/baseinfo/systemcode/findProNoByfactoryId.do",
                     //数据，json字符串
-                    data: {'factoryId': factoryId},
+                    data: {'factoryId': factoryId, "pType": "货物"},
                     dataType: "json",
                     //请求成功
                     success: function (result) {
                         console.log(result);
                         $.each(result, function (i, n) {
 
-                            $("#productNo").append("<option value="+n.productnum+">"+n.productnum+"</option>")
+                            $("#productNo").append("<option value=" + n.productnum + ">" + n.productnum + "</option>")
                             console.log(i);
                             console.log(n);
 
@@ -97,7 +97,8 @@
                     <div class="col-md-2 title">货号</div>
                     <div class="col-md-4 data">
                         <select class="form-control" name="productNo" id="productNo"
-                                onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text">
+                                onchange="document.getElementById('factoryName').value=this.options[this.selectedIndex].text"
+                        >
                             <option value="">请选择</option>
 
                         </select>

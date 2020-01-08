@@ -12,7 +12,7 @@
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
 </head>
 
-<body class="hold-transition skin-black-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
     <!-- 页面头部 -->
     <jsp:include page="header.jsp"></jsp:include>

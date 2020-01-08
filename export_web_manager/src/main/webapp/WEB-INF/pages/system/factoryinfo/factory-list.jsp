@@ -93,6 +93,7 @@
                         <th class="sorting">厂家全名</th>
                         <th class="sorting">厂家代称</th>
                         <th class="sorting">联系人</th>
+                        <th class="sorting">分类</th>
                         <th class="sorting">电话</th>
                         <th class="sorting">固定电话</th>
                         <th class="sorting">传真</th>
@@ -110,6 +111,7 @@
                             <td>${o.fullName}</td>
                             <td>${o.factoryName}</td>
                             <td>${o.contacts}</td>
+                            <td>${o.ctype}</td>
                             <td>${o.mobile}</td>
                             <td>${o.phone}</td>
                             <td>${o.fax}</td>

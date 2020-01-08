@@ -58,6 +58,15 @@
                         <input type="text" class="form-control" placeholder="货号" name="productnum">
                     </div>
 
+                    <div class="col-md-2 title">分类</div>
+                    <div class="col-md-4 data">
+                        <input type="text" name="pType" value="">
+                        <select class="form-control" name="pType">
+                            <option value="附件">附件</option>
+                            <option value="货物">货物</option>
+                        </select>
+                    </div>
+
 
                 </div>
             </form>

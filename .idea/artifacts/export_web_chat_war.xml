@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="export_web_chat:war">
+    <output-path>$PROJECT_DIR$/export_web_chat/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>export_web_chat</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="easy-chat.war">
+      <element id="artifact" artifact-name="export_web_chat:war exploded" />
+    </root>
+  </artifact>
+</component>

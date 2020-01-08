@@ -47,8 +47,6 @@ public class SystemCodeController extends BaseController {
     public String toAdd() {
         //3. 通过factoryService查询所有货物的厂家
         FactoryExample factoryExample = new FactoryExample();
-        FactoryExample.Criteria factoryCriteria = factoryExample.createCriteria();
-        factoryCriteria.andCtypeEqualTo("货物");
         List<Factory> factoryList = factoryService.findAll(factoryExample);
         //4. 将货物厂家信息放入request域当中
         request.setAttribute("factoryList", factoryList);
@@ -69,14 +67,24 @@ public class SystemCodeController extends BaseController {
 
     @RequestMapping("/findProNoByfactoryId")
     @ResponseBody
-    public String factoryId(String factoryId) {
+    public String factoryId(String factoryId, String pType) {
         SCProductNoExample scProductNoExample = new SCProductNoExample();
         //设置条件
         SCProductNoExample.Criteria criteria = scProductNoExample.createCriteria();
         criteria.andFactoryIdEqualTo(factoryId);
+        criteria.andPTypeEqualTo(pType);
         List<SCProductNo> list = scProductNoService.findProductsByFactoryId(scProductNoExample);
         String jsonString = JSONObject.toJSONString(list);
         System.out.println(jsonString);
         return jsonString;
     }
+
+
+    @RequestMapping("/delete")
+    public String delete(String id) {
+        scProductNoService.delete(id);
+        return "redirect:/baseinfo/systemcode/list.do";
+    }
+
+
 }

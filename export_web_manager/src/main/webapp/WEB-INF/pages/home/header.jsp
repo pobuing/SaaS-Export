@@ -25,65 +25,19 @@
                         <li>
                             <ul class="menu">
                                 <li>
-                                    <a href="#">
+                                    <a href="http://localhost:8099/chat?name=${sessionScope.loginUser.userName}&token=${sessionScope.loginUser.password}"
+                                       target="_blank">
                                         <div class="pull-left">
                                             <img src="${ctx}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
-                                            系统消息
+                                            保健区
                                             <small><i class="fa fa-clock-o"></i> 5 分钟前</small>
                                         </h4>
-                                        <p>欢迎登录系统?</p>
+                                        <p>您好，请上楼！</p>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <img src="${ctx}/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                        </div>
-                                        <h4>
-                                            团队消息
-                                            <small><i class="fa fa-clock-o"></i> 2 小时前</small>
-                                        </h4>
-                                        <p>你有新的任务了</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <img src="${ctx}/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                        </div>
-                                        <h4>
-                                            Developers
-                                            <small><i class="fa fa-clock-o"></i> Today</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <img src="${ctx}/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                        </div>
-                                        <h4>
-                                            Sales Department
-                                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="pull-left">
-                                            <img src="${ctx}/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                        </div>
-                                        <h4>
-                                            Reviewers
-                                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                        </h4>
-                                        <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
                         <li class="footer"><a href="#">See All Messages</a></li>
@@ -230,7 +184,7 @@
                             <img src="${ctx}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                ${sessionScope.user.userName}
+                                ${sessionScope.loginUser.userName}
                             </p>
                         </li>
                         <!-- Menu Body

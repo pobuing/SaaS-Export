@@ -6,6 +6,7 @@ import com.itheima.saas.common.utils.MailUtil;
 import com.itheima.saas.domain.system.Dept;
 import com.itheima.saas.domain.system.Role;
 import com.itheima.saas.domain.system.User;
+import com.itheima.saas.service.stat.company.ICompanyService;
 import com.itheima.saas.service.stat.system.IDeptService;
 import com.itheima.saas.service.stat.system.IRoleService;
 import com.itheima.saas.service.stat.system.IUserService;
@@ -41,6 +42,9 @@ public class UserController extends BaseController {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
+    @Autowired
+    private ICompanyService companyService;
+
     @RequestMapping(value = "/list", name = "分页查询用户列表")
     public String list(@RequestParam(defaultValue = "1") int page,
                        @RequestParam(defaultValue = "5") int size) {
@@ -60,8 +64,21 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/edit", name = "编辑用户")
     public String edit(User user) {
-        user.setCompanyId(companyId);
-        user.setCompanyName(companyName);
+        //提示语句
+        String notiTag = "";
+        boolean companyManager = false;
+        if (StringUtils.isEmpty(user.getCompanyId())) {
+            //为空代表普通用户
+            user.setCompanyId(companyId);
+            user.setCompanyName(companyName);
+        } else {
+            companyManager = true;
+            //不为空代表企业管理员用户
+            //设置企业名称
+            String companyName = companyService.findById(user.getCompanyId()).getName();
+            user.setCompanyName(companyName);
+            notiTag = "\r\n您被指定为系统管理员" + companyName;
+        }
         if (StringUtils.isEmpty(user.getId())) {
             //新增设置id
             user.setId(UUID.randomUUID().toString());
@@ -72,12 +89,13 @@ public class UserController extends BaseController {
             //发送邮件
             String to = user.getEmail();
             String subject = "欢迎来到SaaS-Export大家庭";
-            String content = "您使用的SaaS-Export平台通过：http://localhost:8080 进行登录，用户名为：" + to + "，密码是：" + password;
-            try {
+            subject += notiTag;
+            String content = "\r\n您使用的SaaS-Export平台通过：http://localhost:8080 进行登录，用户名为：" + to + "，密码是：" + password;
+           /* try {
                 MailUtil.sendMsg(to, subject, content);
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
 
             //将邮件内容写入到rabbitMQ中
 
@@ -96,8 +114,13 @@ public class UserController extends BaseController {
             //修改
             userService.update(user);
         }
-        //重定向回列表页
-        return "redirect:/system/user/list.do";
+        if (companyManager) {
+            //重定向公司列表页
+            return "redirect:/company/list.do";
+        } else {
+            //重定向回用户列表页
+            return "redirect:/system/user/list.do";
+        }
 
     }
 

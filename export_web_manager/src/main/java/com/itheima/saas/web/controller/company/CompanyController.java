@@ -2,7 +2,9 @@ package com.itheima.saas.web.controller.company;
 
 import com.itheima.saas.common.entity.PageBean;
 import com.itheima.saas.domain.company.Company;
+import com.itheima.saas.domain.system.Dept;
 import com.itheima.saas.service.stat.company.ICompanyService;
+import com.itheima.saas.service.stat.system.IDeptService;
 import com.itheima.saas.web.controller.BaseController;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,6 +28,8 @@ public class CompanyController extends BaseController {
     @Autowired
     private ICompanyService companyService;
 
+    @Autowired
+    private IDeptService deptService;
 
     @RequestMapping(value = "/list", name = "企业列表")
     public String list(@RequestParam(defaultValue = "1") int page,
@@ -76,5 +81,15 @@ public class CompanyController extends BaseController {
         return "redirect:/company/list.do";
     }
 
+
+    @RequestMapping("/toAddCompAdmin")
+    public String toAddCompAdmin(String id) {
+        request.setAttribute("companyId", id);
+        //查询部门
+        //查询部门列表
+        List<Dept> deptList = deptService.findAll(companyId);
+        request.setAttribute("deptList", deptList);
+        return "system/user/user-add";
+    }
 
 }
