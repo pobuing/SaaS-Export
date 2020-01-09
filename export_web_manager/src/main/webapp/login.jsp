@@ -25,7 +25,7 @@
 
 </script>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1578543971086&di=cc2cebc94b93e4650f3126be6fd341e4&imgtype=0&src=http%3A%2F%2Fpicture.ik123.com%2Fuploads%2Fallimg%2F150506%2F17-150506114106.jpg')">
 <div class="login-box">
     <div class="login-logo">
         <a href="all-admin-index.html">SaaS外贸出口云平台</a>

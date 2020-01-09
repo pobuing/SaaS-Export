@@ -42,8 +42,8 @@
 <div id="frameContent" class="content-wrapper" style="margin-left:0px;">
 <section class="content-header">
     <h1>
-        货运管理
-        <small>购销合同</small>
+        厂家列表
+        <small>厂家列表</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
